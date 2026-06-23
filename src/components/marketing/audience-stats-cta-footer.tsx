@@ -1,272 +1,93 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { Button } from "@/components/ui/button";
 
 /* ── Audience Split ─────────────────────────────────────────────────── */
-export function AudienceSplitSection() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
-
-  const merchantBullets = isAr
-    ? [
-        "لوحة واحدة لكل طلب وكل شركة شحن",
-        "الدفع عند التسليم وتسوية سريعة لمحفظتك",
-        "أسعار أقل بفضل منافسة حقيقية بين الشركات",
-        "المرتجعات والتتبع في مكان واحد",
-      ]
-    : [
-        "One dashboard for every order and every carrier",
-        "Cash on delivery, settled fast to your wallet",
-        "Lower rates through real carrier competition",
-        "Returns and tracking handled in one place",
-      ];
-
-  const carrierBullets = isAr
-    ? [
-        "الوصول إلى تجار يبحثون عن الشحن الآن",
-        "أدر كل طلب من منصة تقنية واحدة",
-        "توجيه ذكي وتوزيع تلقائي للطلبات",
-        "قلّل حجمك دون فريق مبيعات",
-      ]
-    : [
-        "Reach merchants actively looking to ship",
-        "Manage every order from one tech platform",
-        "Smart routing and automatic assignment",
-        "Grow your volume without a sales team",
-      ];
-
-  function BulletList({
-    items,
-    checkColor,
-    checkBg,
-  }: {
-    items: string[];
-    checkColor: string;
-    checkBg: string;
-  }) {
-    return (
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-        {items.map((item) => (
-          <div key={item} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-            <div
-              style={{
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                background: checkBg,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-                marginTop: 2,
-              }}
-            >
-              <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
-                <path
-                  d="M1.5 4.5l2 2 4-4"
-                  stroke={checkColor}
-                  strokeWidth="1.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <span style={{ fontSize: 15, color: "#5A6573", lineHeight: 1.5 }}>{item}</span>
+function BulletList({ items, accent }: { items: string[]; accent: "primary" | "accent" }) {
+  return (
+    <div className="flex flex-col gap-3">
+      {items.map((item, i) => (
+        <div key={i} className="flex items-start gap-2.5">
+          <div className={`mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full ${accent === "primary" ? "bg-primary/20" : "bg-accent/20"}`}>
+            <svg width="9" height="9" viewBox="0 0 9 9" fill="none">
+              <path
+                d="M1.5 4.5l2 2 4-4"
+                stroke={accent === "primary" ? "var(--color-primary)" : "var(--color-accent)"}
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </div>
-        ))}
-      </div>
-    );
-  }
+          <span className="text-[15px] leading-normal text-foreground/75">{item}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export function AudienceSplitSection() {
+  const t = useTranslations("audience");
+
+  const merchantBullets = [0, 1, 2, 3].map((i) => t(`merchants.bullets.${i}`));
+  const carrierBullets  = [0, 1, 2, 3].map((i) => t(`carriers.bullets.${i}`));
 
   return (
-    <section
-      id="audience"
-      style={{ background: "#ffffff", padding: "92px 24px" }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 28,
-        }}
-        className="audience-grid"
-      >
+    <section id="audience" className="bg-background px-6 py-23">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-7 md:grid-cols-2">
+
         {/* Merchants */}
-        <div
-          style={{
-            background: "#EEF4FF",
-            borderRadius: 24,
-            padding: 40,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: "#1B6EF3",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              background: "#D6E8FF",
-              borderRadius: 8,
-              padding: "4px 10px",
-              display: "inline-block",
-              marginBottom: 20,
-            }}
-          >
-            {isAr ? "للتجار" : "For merchants"}
+        <div className="rounded-3xl bg-primary/8 p-10">
+          <span className="mb-5 inline-block rounded-lg bg-primary/15 px-2.5 py-1 text-[12px] font-bold uppercase tracking-[0.06em] text-primary">
+            {t("merchants.kicker")}
           </span>
-          <h3
-            style={{
-              fontSize: "clamp(22px, 2.5vw, 30px)",
-              fontWeight: 800,
-              color: "#1B6EF3",
-              marginBottom: 24,
-              lineHeight: 1.25,
-            }}
-          >
-            {isAr
-              ? "تخلّص عن إدارة خمس شركات شحن"
-              : "Stop juggling five shipping companies"}
+          <h3 className="mb-6 text-[clamp(22px,2.5vw,30px)] font-extrabold leading-tight text-primary">
+            {t("merchants.h3")}
           </h3>
-          <BulletList items={merchantBullets} checkColor="#1B6EF3" checkBg="#C5D8FF" />
-          <a
-            href="#cta"
-            style={{
-              display: "inline-block",
-              marginTop: 28,
-              background: "#1B6EF3",
-              color: "#fff",
-              fontSize: 14,
-              fontWeight: 700,
-              borderRadius: 12,
-              padding: "11px 20px",
-              textDecoration: "none",
-              transition: "background 0.15s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#0B4FCC")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#1B6EF3")}
-          >
-            {isAr ? "ابدأ الشحن مجاناً" : "Start shipping free"}
-          </a>
+          <BulletList items={merchantBullets} accent="primary" />
+          <Button asChild size="default" className="mt-7 rounded-xl font-bold">
+            <a href="#cta">{t("merchants.cta")}</a>
+          </Button>
         </div>
 
         {/* Carriers */}
-        <div
-          style={{
-            background: "#FFF4EE",
-            borderRadius: 24,
-            padding: 40,
-          }}
-        >
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: "#C2410C",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              background: "#FFE0CF",
-              borderRadius: 8,
-              padding: "4px 10px",
-              display: "inline-block",
-              marginBottom: 20,
-            }}
-          >
-            {isAr ? "لشركات الشحن" : "For carriers"}
+        <div className="rounded-3xl bg-accent/8 p-10">
+          <span className="mb-5 inline-block rounded-lg bg-accent/15 px-2.5 py-1 text-[12px] font-bold uppercase tracking-[0.06em] text-accent">
+            {t("carriers.kicker")}
           </span>
-          <h3
-            style={{
-              fontSize: "clamp(22px, 2.5vw, 30px)",
-              fontWeight: 800,
-              color: "#C2410C",
-              marginBottom: 24,
-              lineHeight: 1.25,
-            }}
-          >
-            {isAr
-              ? "تدفق ثابت من طلبات التجار"
-              : "A steady stream of merchant orders"}
+          <h3 className="mb-6 text-[clamp(22px,2.5vw,30px)] font-extrabold leading-tight text-accent">
+            {t("carriers.h3")}
           </h3>
-          <BulletList items={carrierBullets} checkColor="#C2410C" checkBg="#FFD5BF" />
-          <a
-            href="#cta"
-            style={{
-              display: "inline-block",
-              marginTop: 28,
-              background: "#FF6B2C",
-              color: "#fff",
-              fontSize: 14,
-              fontWeight: 700,
-              borderRadius: 12,
-              padding: "11px 20px",
-              textDecoration: "none",
-              transition: "background 0.15s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = "#e85a1c")}
-            onMouseLeave={(e) => (e.currentTarget.style.background = "#FF6B2C")}
+          <BulletList items={carrierBullets} accent="accent" />
+          <Button
+            asChild
+            size="default"
+            className="mt-7 rounded-xl bg-accent font-bold text-accent-foreground shadow-[0_10px_24px_color-mix(in_oklch,var(--accent)_30%,transparent)] hover:bg-accent/90"
           >
-            {isAr ? "انضم كشركة شحن" : "Join as a carrier"}
-          </a>
+            <a href="#cta">{t("carriers.cta")}</a>
+          </Button>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .audience-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }
 
 /* ── Stats Bar ──────────────────────────────────────────────────────── */
-const STATS = [
-  { enNum: "10+", arNum: "+10", enLabel: "Shipping carriers", arLabel: "شركة شحن" },
-  { enNum: "500+", arNum: "+500", enLabel: "Active merchants", arLabel: "تاجر نشط" },
-  { enNum: "98%", arNum: "98%", enLabel: "On-time delivery", arLabel: "معدل التسليم في الوقت" },
-  { enNum: "5", arNum: "5", enLabel: "Live tracking stages", arLabel: "مراحل تتبع حية" },
-];
-
 export function StatsBarSection() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
+  const t = useTranslations("stats");
 
   return (
-    <section style={{ background: "#F7F8FA", padding: "64px 24px" }}>
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          display: "flex",
-          justifyContent: "center",
-          gap: 48,
-          flexWrap: "wrap",
-        }}
-      >
-        {STATS.map((s) => (
-          <div key={s.enLabel} style={{ textAlign: "center" }}>
-            <p
-              style={{
-                fontSize: 48,
-                fontWeight: 800,
-                color: "#1B6EF3",
-                margin: 0,
-                lineHeight: 1,
-              }}
-            >
-              {isAr ? s.arNum : s.enNum}
+    <section className="bg-muted/50 px-6 py-16">
+      <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-12">
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="text-center">
+            <p className="text-[48px] font-extrabold leading-none text-primary">
+              {t(`items.${i}.num`)}
             </p>
-            <p
-              style={{
-                fontSize: 15,
-                fontWeight: 600,
-                color: "#5A6573",
-                margin: "6px 0 0",
-              }}
-            >
-              {isAr ? s.arLabel : s.enLabel}
+            <p className="mt-1.5 text-[15px] font-semibold text-muted-foreground">
+              {t(`items.${i}.label`)}
             </p>
           </div>
         ))}
@@ -277,95 +98,40 @@ export function StatsBarSection() {
 
 /* ── CTA Section ────────────────────────────────────────────────────── */
 export function CTASection() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
+  const t = useTranslations("cta");
 
   return (
     <section
       id="cta"
+      className="px-6 py-24 text-center"
       style={{
         background:
-          "radial-gradient(900px 480px at 50% 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 62%), #1B6EF3",
-        padding: "96px 24px",
-        textAlign: "center",
+          "radial-gradient(900px 480px at 50% 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 62%), var(--color-primary)",
       }}
     >
-      <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        <h2
-          style={{
-            fontSize: "clamp(30px, 4vw, 48px)",
-            fontWeight: 800,
-            letterSpacing: "-0.03em",
-            color: "#fff",
-            marginBottom: 16,
-          }}
-        >
-          {isAr
-            ? "مصمّم لسوقك. ابدأ مجاناً اليوم."
-            : "Built for your market. Start free today."}
+      <div className="mx-auto max-w-7xl">
+        <h2 className="mb-4 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em] text-white">
+          {t("h2")}
         </h2>
-        <p
-          style={{
-            fontSize: 18,
-            color: "rgba(255,255,255,0.75)",
-            maxWidth: 520,
-            margin: "0 auto 32px",
-            lineHeight: 1.55,
-          }}
-        >
-          {isAr
-            ? "انضم إلى التجار الذين يشحنون بذكاء في سوريا والمنطقة."
-            : "Join the merchants shipping smarter across Syria and MENA."}
+        <p className="mx-auto mb-8 max-w-130 text-[18px] leading-[1.55] text-white/75">
+          {t("sub")}
         </p>
-        <div
-          style={{
-            display: "flex",
-            gap: 14,
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <a
-            href="#"
-            style={{
-              display: "inline-block",
-              fontSize: 15,
-              fontWeight: 700,
-              color: "#1B6EF3",
-              background: "#fff",
-              borderRadius: 12,
-              padding: "15px 28px",
-              textDecoration: "none",
-              transition: "opacity 0.15s",
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.9")}
-            onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
+        <div className="flex flex-wrap justify-center gap-3.5">
+          <Button
+            asChild
+            size="lg"
+            className="rounded-xl bg-white font-bold text-primary hover:bg-white/90"
           >
-            {isAr ? "ابدأ مجاناً" : "Get Started Free"}
-          </a>
-          <a
-            href="#"
-            style={{
-              display: "inline-block",
-              fontSize: 15,
-              fontWeight: 700,
-              color: "#fff",
-              background: "transparent",
-              border: "1.5px solid rgba(255,255,255,0.45)",
-              borderRadius: 12,
-              padding: "15px 28px",
-              textDecoration: "none",
-              transition: "border-color 0.15s",
-            }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.8)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.borderColor = "rgba(255,255,255,0.45)")
-            }
+            <a href="#">{t("primary")}</a>
+          </Button>
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="rounded-xl border-white/45 font-bold text-white hover:border-white/80 hover:bg-transparent hover:text-white"
           >
-            {isAr ? "تحدث إلينا" : "Talk to us"}
-          </a>
+            <a href="#">{t("secondary")}</a>
+          </Button>
         </div>
       </div>
     </section>
@@ -374,76 +140,21 @@ export function CTASection() {
 
 /* ── Footer ─────────────────────────────────────────────────────────── */
 export function MarketingFooter() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
+  const t = useTranslations("footer");
 
   return (
-    <footer
-      style={{
-        background: "#0D1B2A",
-        padding: "44px 24px",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          display: "flex",
-          alignItems: "center",
-          gap: 24,
-          flexWrap: "wrap",
-        }}
-      >
-        {/* Logo + tagline */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 10, direction: "ltr" }}>
-            <span
-              style={{
-                width: 30,
-                height: 30,
-                background: "#1B6EF3",
-                borderRadius: 8,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg width="16" height="14" viewBox="0 0 20 18" fill="none">
-                <path d="M3 14 L10 4 L17 14" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                <circle cx="17" cy="14" r="3" fill="#FF6B2C" stroke="white" strokeWidth="1.5" />
-              </svg>
-            </span>
-            <span style={{ fontSize: 18, fontWeight: 800, color: "#fff" }}>
-              <span style={{ fontWeight: 500 }}>izi</span>ship
-            </span>
+    <footer className="bg-[#0D1B2A] px-6 py-11">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-6">
+        <div className="flex flex-col gap-2">
+          <div dir="ltr">
+            <Image src="/logo-dark.svg" alt="iziship" width={120} height={34} className="h-8.5 w-auto" />
           </div>
-          <p
-            style={{
-              fontSize: 14,
-              color: "rgba(255,255,255,0.5)",
-              maxWidth: 420,
-              lineHeight: 1.5,
-              margin: 0,
-            }}
-          >
-            {isAr
-              ? "أول منصة لوجستية متعددة الشركات في سوريا — مصنوعة للتجار الذين يشحنون بالدفع عند التسليم."
-              : "Syria's first multi-carrier logistics platform — built for merchants who ship COD."}
+          <p className="max-w-105 text-[14px] leading-normal text-white/50">
+            {t("tagline")}
           </p>
         </div>
-
-        {/* Copyright */}
-        <p
-          style={{
-            fontSize: 13,
-            color: "rgba(255,255,255,0.4)",
-            marginInlineStart: "auto",
-            margin: 0,
-          }}
-        >
-          {isAr
-            ? "© 2026 iziship. جميع الحقوق محفوظة."
-            : "© 2026 iziship. All rights reserved."}
+        <p className="ms-auto text-[13px] text-white/40">
+          {t("copyright")}
         </p>
       </div>
     </footer>

@@ -1,206 +1,62 @@
 "use client";
 
-import { useLocale } from "next-intl";
-
-const CONTENT = {
-  en: {
-    kicker: "LIVE PLATFORM",
-    h2: "Compare all shipping companies in one screen",
-    searchPlaceholder: "Search for a shipment",
-    createBtn: "+ Create shipment",
-    calcTitle: "Price Calculator",
-    route: "Damascus → Aleppo · Shipping Options",
-    proPlan: "Pro Plan",
-    columns: ["Carrier", "Service Type", "Delivery Time", "Delivery", "Price"],
-    actionLabel: "Create",
-    trust: "Trusted by 10,000+ businesses across the region",
-    carriersLabel: "carriers",
-    carriersNum: "400+",
-  },
-  ar: {
-    kicker: "المنصة مباشرةً",
-    h2: "قارن كل شركات الشحن في شاشة واحدة",
-    searchPlaceholder: "ابحث عن شحنة",
-    createBtn: "+ إنشاء شحنة",
-    calcTitle: "حاسبة الأسعار",
-    route: "دمشق → حلب · خيارات الشحن",
-    proPlan: "الخطة الاحترافية",
-    columns: ["شركة الشحن", "نوع الخدمة", "مدة التسليم", "التسليم", "السعر"],
-    actionLabel: "أنشئ",
-    trust: "موثوق من أكثر من 10,000 شركة في المنطقة",
-    carriersLabel: "شركة شحن",
-    carriersNum: "+400",
-  },
-};
+import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 
 const CARRIERS = [
-  {
-    mark: "B",
-    name: "Bosta",
-    namear: "بوستا",
-    bg: "#FFF0EB",
-    fg: "#FF6B2C",
-    rating: "4.9",
-    serviceEn: "Express",
-    serviceAr: "سريع",
-    etaEn: "1–2 business days",
-    etaAr: "1–2 يوم عمل",
-    deliveryEn: "To door",
-    deliveryAr: "حتى الباب",
-    price: "$3.20",
-  },
-  {
-    mark: "A",
-    name: "Aramex",
-    namear: "أرامكس",
-    bg: "#FFEAEA",
-    fg: "#D32F2F",
-    rating: "4.8",
-    serviceEn: "Express",
-    serviceAr: "سريع",
-    etaEn: "1–3 business days",
-    etaAr: "1–3 يوم عمل",
-    deliveryEn: "To door",
-    deliveryAr: "حتى الباب",
-    price: "$3.80",
-  },
-  {
-    mark: "S",
-    name: "SMSA",
-    namear: "SMSA",
-    bg: "#E8F0FF",
-    fg: "#1B6EF3",
-    rating: "4.7",
-    serviceEn: "Standard",
-    serviceAr: "عادي",
-    etaEn: "2–3 business days",
-    etaAr: "2–3 يوم عمل",
-    deliveryEn: "To door",
-    deliveryAr: "حتى الباب",
-    price: "$4.10",
-  },
-  {
-    mark: "N",
-    name: "Naqel",
-    namear: "ناقل",
-    bg: "#E9FBF0",
-    fg: "#16A34A",
-    rating: "4.8",
-    serviceEn: "Express",
-    serviceAr: "سريع",
-    etaEn: "1–3 business days",
-    etaAr: "1–3 يوم عمل",
-    deliveryEn: "Branch",
-    deliveryAr: "فرع",
-    price: "$4.50",
-  },
-  {
-    mark: "F",
-    name: "Fardar",
-    namear: "فردار",
-    bg: "#F3E8FF",
-    fg: "#7C3AED",
-    rating: "4.6",
-    serviceEn: "Standard",
-    serviceAr: "عادي",
-    etaEn: "2–4 business days",
-    etaAr: "2–4 يوم عمل",
-    deliveryEn: "To door",
-    deliveryAr: "حتى الباب",
-    price: "$4.90",
-  },
+  { mark: "B", name: "Bosta",  bg: "bg-accent/10",       fg: "text-accent",       rating: "4.9", price: "$3.20" },
+  { mark: "A", name: "Aramex", bg: "bg-destructive/10",  fg: "text-destructive",  rating: "4.8", price: "$3.80" },
+  { mark: "S", name: "SMSA",   bg: "bg-primary/10",      fg: "text-primary",      rating: "4.7", price: "$4.10" },
+  { mark: "N", name: "Naqel",  bg: "bg-success/10",      fg: "text-success",      rating: "4.8", price: "$4.50" },
+  { mark: "F", name: "Fardar", bg: "bg-[#7C3AED]/10",    fg: "text-[#7C3AED]",   rating: "4.6", price: "$4.90" },
 ];
 
 export function PriceCalculatorSection() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
-  const c = isAr ? CONTENT.ar : CONTENT.en;
+  const t = useTranslations("priceCalculator");
+
+  const columns = [
+    t("columns.carrier"),
+    t("columns.serviceType"),
+    t("columns.deliveryTime"),
+    t("columns.delivery"),
+    t("columns.price"),
+  ];
 
   return (
     <section
+      className="px-6 pb-22 pt-9"
       style={{
         background:
-          "radial-gradient(900px 480px at 50% -12%, #E8F0FF 0%, rgba(232,240,255,0) 62%), #ffffff",
-        padding: "36px 24px 88px",
+          "radial-gradient(900px 480px at 50% -12%, color-mix(in oklch, var(--primary) 12%, transparent) 0%, transparent 62%), var(--background)",
       }}
     >
       {/* Heading */}
-      <div style={{ textAlign: "center", maxWidth: 660, margin: "0 auto 48px" }}>
-        <p
-          style={{
-            fontSize: 13,
-            fontWeight: 800,
-            letterSpacing: "0.12em",
-            textTransform: "uppercase",
-            color: "#1B6EF3",
-            marginBottom: 12,
-          }}
-        >
-          {c.kicker}
+      <div className="mx-auto mb-12 max-w-165 text-center">
+        <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-primary">
+          {t("kicker")}
         </p>
-        <h2
-          style={{
-            fontSize: "clamp(28px, 3.5vw, 40px)",
-            fontWeight: 800,
-            letterSpacing: "-0.025em",
-            color: "#14181F",
-          }}
-        >
-          {c.h2}
+        <h2 className="text-[clamp(28px,3.5vw,40px)] font-extrabold tracking-tight text-foreground">
+          {t("h2")}
         </h2>
       </div>
 
       {/* Dashboard mockup */}
-      <div
-        style={{
-          maxWidth: 1060,
-          margin: "0 auto",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            background: "#fff",
-            border: "1px solid #EAEEF4",
-            borderRadius: 20,
-            boxShadow: "0 34px 80px rgba(13,27,42,0.18)",
-            overflow: "hidden",
-            display: "flex",
-          }}
-        >
+      <div className="relative mx-auto max-w-265">
+        <div className="flex overflow-hidden rounded-[20px] border border-border bg-card shadow-[0_34px_80px_oklch(0.148_0.012_253/18%)]">
+
           {/* Left sidebar */}
-          <div
-            style={{
-              width: 54,
-              background: "#0D1B2A",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "16px 0",
-              gap: 14,
-              flexShrink: 0,
-            }}
-          >
-            <div
-              style={{
-                width: 30,
-                height: 30,
-                background: "#1B6EF3",
-                borderRadius: 8,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{ fontSize: 10, fontWeight: 800, color: "#fff" }}>izi</span>
+          <div className="flex w-13.5 shrink-0 flex-col items-center gap-3.5 bg-[#0D1B2A] py-4">
+            <div className="flex size-7.5 items-center justify-center rounded-lg bg-primary">
+              <span className="text-[10px] font-extrabold text-primary-foreground">izi</span>
             </div>
             {[55, 30, 40, 22, 35].map((w, i) => (
               <div
                 key={i}
+                className="h-1.5 rounded-full"
                 style={{
                   width: w * 0.38,
-                  height: 6,
-                  borderRadius: 3,
                   background: i === 0 ? "rgba(255,255,255,0.55)" : "rgba(255,255,255,0.22)",
                 }}
               />
@@ -208,288 +64,97 @@ export function PriceCalculatorSection() {
           </div>
 
           {/* Main body */}
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="min-w-0 flex-1">
+
             {/* Top bar */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "12px 20px",
-                borderBottom: "1px solid #EAEEF4",
-                flexWrap: "wrap",
-              }}
-            >
-              {/* Search */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  background: "#F4F6FA",
-                  borderRadius: 9,
-                  padding: "7px 12px",
-                  flex: 1,
-                  minWidth: 140,
-                }}
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <circle cx="6" cy="6" r="4.5" stroke="#AEB6C2" strokeWidth="1.4" />
-                  <path d="M9.5 9.5L12 12" stroke="#AEB6C2" strokeWidth="1.4" strokeLinecap="round" />
+            <div className="flex flex-wrap items-center gap-2.5 border-b border-border px-5 py-3">
+              <div className="flex min-w-35 flex-1 items-center gap-2 rounded-[9px] bg-muted px-3 py-1.5">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0 text-muted-foreground">
+                  <circle cx="6" cy="6" r="4.5" stroke="currentColor" strokeWidth="1.4" />
+                  <path d="M9.5 9.5L12 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                 </svg>
-                <span style={{ fontSize: 13, color: "#AEB6C2" }}>{c.searchPlaceholder}</span>
+                <span className="text-[13px] text-muted-foreground">{t("searchPlaceholder")}</span>
               </div>
-              {/* Create button */}
-              <button
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: "#1B6EF3",
-                  background: "#fff",
-                  border: "1.5px solid #1B6EF3",
-                  borderRadius: 9,
-                  padding: "7px 13px",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {c.createBtn}
-              </button>
-              {/* Revenue */}
-              <span
-                style={{
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: "#5A6573",
-                  background: "#F4F6FA",
-                  borderRadius: 8,
-                  padding: "5px 10px",
-                }}
-              >
-                $3,260
-              </span>
-              {/* Bell */}
-              <div style={{ position: "relative" }}>
-                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <path
-                    d="M9 2a5 5 0 0 1 5 5v3.5l1.5 2H2.5L4 10.5V7a5 5 0 0 1 5-5zM7 15a2 2 0 0 0 4 0"
-                    stroke="#5A6573"
-                    strokeWidth="1.4"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+              <Button variant="outline" size="sm" className="whitespace-nowrap rounded-[9px] border-primary/40 text-xs font-bold text-primary">
+                {t("createBtn")}
+              </Button>
+              <Badge variant="secondary" className="rounded-lg font-bold">$3,260</Badge>
+              <div className="relative">
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="text-muted-foreground">
+                  <path d="M9 2a5 5 0 0 1 5 5v3.5l1.5 2H2.5L4 10.5V7a5 5 0 0 1 5-5zM7 15a2 2 0 0 0 4 0" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-                <span
-                  style={{
-                    position: "absolute",
-                    top: -2,
-                    insetInlineEnd: -2,
-                    width: 7,
-                    height: 7,
-                    background: "#FF6B2C",
-                    borderRadius: "50%",
-                    border: "1.5px solid #fff",
-                  }}
-                />
+                <span className="absolute -inset-e-0.5 -top-0.5 size-1.75 rounded-full border-[1.5px] border-card bg-accent" />
               </div>
             </div>
 
-            {/* Calculator section */}
-            <div style={{ padding: "20px 24px" }}>
-              {/* Header */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  marginBottom: 16,
-                }}
-              >
-                <div
-                  style={{
-                    width: 32,
-                    height: 32,
-                    background: "#E8F0FF",
-                    borderRadius: 9,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
+            {/* Calculator header */}
+            <div className="px-6 py-5">
+              <div className="mb-4 flex items-center gap-2.5">
+                <div className="flex size-8 items-center justify-center rounded-[9px] bg-primary/10">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="2" y="2" width="5" height="5" rx="1.5" fill="#1B6EF3" />
-                    <rect x="9" y="2" width="5" height="5" rx="1.5" fill="#1B6EF3" opacity="0.5" />
-                    <rect x="2" y="9" width="5" height="5" rx="1.5" fill="#1B6EF3" opacity="0.5" />
-                    <rect x="9" y="9" width="5" height="5" rx="1.5" fill="#1B6EF3" opacity="0.3" />
+                    <rect x="2" y="2" width="5" height="5" rx="1.5" fill="currentColor" className="text-primary" />
+                    <rect x="9" y="2" width="5" height="5" rx="1.5" fill="currentColor" className="text-primary" opacity="0.5" />
+                    <rect x="2" y="9" width="5" height="5" rx="1.5" fill="currentColor" className="text-primary" opacity="0.5" />
+                    <rect x="9" y="9" width="5" height="5" rx="1.5" fill="currentColor" className="text-primary" opacity="0.3" />
                   </svg>
                 </div>
-                <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: "#14181F", margin: 0 }}>
-                    {c.calcTitle}
-                  </p>
-                  <p style={{ fontSize: 12, color: "#AEB6C2", margin: 0 }}>{c.route}</p>
+                <div className="min-w-0">
+                  <p className="text-[15px] font-bold text-foreground">{t("calcTitle")}</p>
+                  <p className="text-xs text-muted-foreground">{t("route")}</p>
                 </div>
-                <div style={{ marginInlineStart: "auto", display: "flex", gap: 8 }}>
-                  <span
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 5,
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: "#14181F",
-                      background: "#F4F6FA",
-                      borderRadius: 8,
-                      padding: "5px 10px",
-                    }}
-                  >
-                    <span
-                      style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF6B2C" }}
-                    />
-                    {c.proPlan}
-                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                      <path d="M2.5 4L5 6.5L7.5 4" stroke="#AEB6C2" strokeWidth="1.4" strokeLinecap="round" />
-                    </svg>
-                  </span>
+                <div className="ms-auto">
+                  <Badge variant="secondary" className="gap-1.5 rounded-lg font-semibold">
+                    <span className="size-1.5 rounded-full bg-accent" />
+                    {t("proPlan")}
+                  </Badge>
                 </div>
               </div>
 
               {/* Table */}
-              <div
-                style={{
-                  border: "1px solid #EEF1F6",
-                  borderRadius: 14,
-                  overflow: "hidden",
-                }}
-              >
-                {/* Table header */}
+              <div className="overflow-hidden rounded-[14px] border border-border">
                 <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1.7fr 1fr 1.4fr 1fr 0.8fr auto",
-                    background: "#F7F8FA",
-                    padding: "9px 16px",
-                    gap: 8,
-                  }}
+                  className="grid bg-muted/60 px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.03em] text-muted-foreground"
+                  style={{ gridTemplateColumns: "1.7fr 1fr 1.4fr 1fr 0.8fr auto" }}
                 >
-                  {c.columns.map((col) => (
-                    <span
-                      key={col}
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        letterSpacing: "0.03em",
-                        textTransform: "uppercase",
-                        color: "#AEB6C2",
-                      }}
-                    >
-                      {col}
-                    </span>
-                  ))}
+                  {columns.map((col) => <span key={col}>{col}</span>)}
                   <span />
                 </div>
 
-                {/* Rows */}
                 {CARRIERS.map((carrier, idx) => (
-                  <div
-                    key={carrier.name}
-                    style={{
-                      display: "grid",
-                      gridTemplateColumns: "1.7fr 1fr 1.4fr 1fr 0.8fr auto",
-                      padding: "11px 16px",
-                      gap: 8,
-                      alignItems: "center",
-                      borderTop: idx > 0 ? "1px solid #EAEEF4" : "none",
-                      background: "#fff",
-                    }}
-                  >
-                    {/* Carrier */}
-                    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <div
-                        style={{
-                          width: 36,
-                          height: 36,
-                          borderRadius: 9,
-                          background: carrier.bg,
-                          color: carrier.fg,
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontWeight: 800,
-                          fontSize: 13,
-                          flexShrink: 0,
-                        }}
-                      >
-                        {carrier.mark}
+                  <div key={carrier.name}>
+                    {idx > 0 && <Separator />}
+                    <div
+                      className="grid items-center gap-2 bg-card px-4 py-2.5"
+                      style={{ gridTemplateColumns: "1.7fr 1fr 1.4fr 1fr 0.8fr auto" }}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className={`flex size-9 shrink-0 items-center justify-center rounded-[9px] text-[13px] font-extrabold ${carrier.bg} ${carrier.fg}`}>
+                          {carrier.mark}
+                        </div>
+                        <div>
+                          <p className="text-[13px] font-bold leading-tight text-foreground">{carrier.name}</p>
+                          <p className="text-[11px] text-muted-foreground">★ {carrier.rating}</p>
+                        </div>
                       </div>
-                      <div>
-                        <p
-                          style={{
-                            fontSize: 13,
-                            fontWeight: 700,
-                            color: "#14181F",
-                            margin: 0,
-                          }}
-                        >
-                          {isAr ? carrier.namear : carrier.name}
-                        </p>
-                        <p style={{ fontSize: 11, color: "#AEB6C2", margin: 0 }}>
-                          ★ {carrier.rating}
-                        </p>
-                      </div>
+
+                      <span className="text-[13px] text-muted-foreground">
+                        {t(`carriers.${idx}.service`)}
+                      </span>
+
+                      <Badge variant="outline" className="w-fit rounded-full border-success/30 bg-success/10 text-[11px] font-bold text-success">
+                        {t(`carriers.${idx}.eta`)}
+                      </Badge>
+
+                      <span className="text-[13px] text-muted-foreground">
+                        {t(`carriers.${idx}.delivery`)}
+                      </span>
+
+                      <span className="text-[15px] font-extrabold text-foreground">{carrier.price}</span>
+
+                      <Button size="sm" className="rounded-[9px] text-xs font-bold">
+                        {t("actionLabel")}
+                      </Button>
                     </div>
-
-                    {/* Service */}
-                    <span style={{ fontSize: 13, color: "#5A6573" }}>
-                      {isAr ? carrier.serviceAr : carrier.serviceEn}
-                    </span>
-
-                    {/* ETA */}
-                    <span
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 600,
-                        color: "#16A34A",
-                        background: "#E9FBF0",
-                        border: "1px solid #CDF3DC",
-                        borderRadius: 999,
-                        padding: "3px 9px",
-                        display: "inline-block",
-                        whiteSpace: "nowrap",
-                      }}
-                    >
-                      {isAr ? carrier.etaAr : carrier.etaEn}
-                    </span>
-
-                    {/* Delivery type */}
-                    <span style={{ fontSize: 13, color: "#5A6573" }}>
-                      {isAr ? carrier.deliveryAr : carrier.deliveryEn}
-                    </span>
-
-                    {/* Price */}
-                    <span style={{ fontSize: 15, fontWeight: 800, color: "#14181F" }}>
-                      {carrier.price}
-                    </span>
-
-                    {/* Action */}
-                    <button
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: "#fff",
-                        background: "#1B6EF3",
-                        border: "none",
-                        borderRadius: 9,
-                        padding: "7px 14px",
-                        cursor: "pointer",
-                        whiteSpace: "nowrap",
-                        transition: "background 0.15s",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.background = "#0B4FCC")}
-                      onMouseLeave={(e) => (e.currentTarget.style.background = "#1B6EF3")}
-                    >
-                      {c.actionLabel}
-                    </button>
                   </div>
                 ))}
               </div>
@@ -498,48 +163,14 @@ export function PriceCalculatorSection() {
         </div>
 
         {/* Floating badge */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: -20,
-            insetInlineEnd: -16,
-            background: "#1B6EF3",
-            color: "#fff",
-            borderRadius: 16,
-            padding: "14px 20px",
-            boxShadow: "0 16px 40px rgba(27,110,243,0.35)",
-            animation: "izFloat 5s ease-in-out infinite 1s",
-            transform: "rotate(-7deg)",
-            textAlign: "center",
-            zIndex: 3,
-          }}
-        >
-          <p
-            style={{
-              fontSize: 26,
-              fontWeight: 800,
-              color: "#FF6B2C",
-              margin: 0,
-              lineHeight: 1,
-            }}
-          >
-            {c.carriersNum}
-          </p>
-          <p style={{ fontSize: 12, fontWeight: 600, margin: "4px 0 0" }}>{c.carriersLabel}</p>
+        <div className="animate-iz-float-slow absolute -bottom-5 -inset-e-4 z-10 rotate-[-7deg] rounded-2xl bg-primary px-5 py-3.5 text-center text-primary-foreground shadow-[0_16px_40px_oklch(0.541_0.233_258/35%)]">
+          <p className="text-[26px] font-extrabold leading-none text-accent">{t("carriersNum")}</p>
+          <p className="mt-1 text-xs font-semibold">{t("carriersLabel")}</p>
         </div>
       </div>
 
-      {/* Trust text */}
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: 21,
-          fontWeight: 700,
-          color: "#14181F",
-          marginTop: 72,
-        }}
-      >
-        {c.trust}
+      <p className="mx-auto mt-18 max-w-7xl text-center text-[21px] font-bold text-foreground">
+        {t("trust")}
       </p>
     </section>
   );

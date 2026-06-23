@@ -1,326 +1,121 @@
 "use client";
 
-import { useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
-const STORES = [
-  { mark: "Woo", bg: "#F3E8FF", fg: "#7C3AED", enName: "WooCommerce", arName: "ووكومرس" },
-  { mark: "سلة", bg: "#E9FBF0", fg: "#16A34A", enName: "Salla", arName: "سلة" },
-  { mark: "زد", bg: "#FFF0EB", fg: "#FF6B2C", enName: "Zid", arName: "زد" },
-  { mark: "M", bg: "#FFEDE4", fg: "#EA580C", enName: "Magento", arName: "ماجنتو" },
-  { mark: "S", bg: "#E9F7E1", fg: "#5A8F2B", enName: "Shopify", arName: "شوبيفاي" },
-  { mark: "API", bg: "#E8F0FF", fg: "#1B6EF3", enName: "Custom API", arName: "واجهة برمجية" },
+const STORE_META = [
+  { mark: "Woo", bg: "bg-[#F3E8FF]", fg: "text-[#7C3AED]" },
+  { mark: "سلة", bg: "bg-[#E9FBF0]", fg: "text-[#16A34A]" },
+  { mark: "زد",  bg: "bg-accent/10",  fg: "text-accent" },
+  { mark: "M",   bg: "bg-[#FFEDE4]", fg: "text-[#EA580C]" },
+  { mark: "S",   bg: "bg-[#E9F7E1]", fg: "text-[#5A8F2B]" },
+  { mark: "API", bg: "bg-primary/10", fg: "text-primary" },
 ];
 
-const CARRIERS = [
-  { mark: "A", bg: "#FFEAEA", fg: "#D32F2F", name: "Aramex" },
-  { mark: "DHL", bg: "#FFF8E1", fg: "#B9930B", name: "DHL" },
-  { mark: "B", bg: "#FFF0EB", fg: "#FF6B2C", name: "Bosta" },
-  { mark: "N", bg: "#E9FBF0", fg: "#16A34A", name: "Naqel" },
-  { mark: "SMSA", bg: "#E8F0FF", fg: "#1B6EF3", name: "SMSA" },
-  { mark: "UPS", bg: "#EFE4D9", fg: "#6B4423", name: "UPS" },
+const CARRIER_META = [
+  { mark: "B", bg: "bg-accent/10",      fg: "text-accent" },
+  { mark: "A", bg: "bg-destructive/10", fg: "text-destructive" },
+  { mark: "S", bg: "bg-primary/10",     fg: "text-primary" },
+  { mark: "N", bg: "bg-success/10",     fg: "text-success" },
+  { mark: "F", bg: "bg-[#7C3AED]/10",   fg: "text-[#7C3AED]" },
+  { mark: "+", bg: "bg-muted",          fg: "text-muted-foreground" },
 ];
 
-function NodeGrid({ items }: { items: typeof STORES }) {
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 12,
-        marginTop: 28,
-      }}
-    >
-      {items.map((item) => (
-        <div
-          key={item.mark}
-          style={{
-            background: item.bg,
-            borderRadius: 14,
-            padding: "14px 12px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 6,
-            transition: "transform 0.15s",
-            cursor: "default",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
-        >
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 11,
-              background: item.bg,
-              border: `1.5px solid ${item.fg}22`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 800,
-              fontSize: 11,
-              color: item.fg,
-            }}
-          >
-            {item.mark}
-          </div>
-          {"enName" in item && (
-            <span style={{ fontSize: 11, fontWeight: 600, color: item.fg, textAlign: "center" }}>
-              {(item as typeof STORES[0]).enName}
-            </span>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function CarrierGrid({ items }: { items: typeof CARRIERS }) {
-  return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: 12,
-        marginTop: 28,
-      }}
-    >
-      {items.map((item) => (
-        <div
-          key={item.mark}
-          style={{
-            background: item.bg,
-            borderRadius: 14,
-            padding: "14px 12px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 6,
-            transition: "transform 0.15s",
-            cursor: "default",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-3px)")}
-          onMouseLeave={(e) => (e.currentTarget.style.transform = "none")}
-        >
-          <div
-            style={{
-              width: 40,
-              height: 40,
-              borderRadius: 11,
-              background: item.bg,
-              border: `1.5px solid ${item.fg}22`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: 800,
-              fontSize: 10,
-              color: item.fg,
-            }}
-          >
-            {item.mark}
-          </div>
-          <span style={{ fontSize: 11, fontWeight: 600, color: item.fg, textAlign: "center" }}>
-            {item.name}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
-}
+const BULLET_ICONS = ["🔌", "🔄", "📦"];
 
 export function IntegrationsSection() {
-  const locale = useLocale() as "en" | "ar";
-  const isAr = locale === "ar";
+  const t = useTranslations("integrations");
 
   return (
-    <section
-      id="int"
-      style={{ background: "#F7F8FA", padding: "88px 24px" }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 40,
-        }}
-        className="int-grid"
-      >
-        {/* Left — stores */}
-        <div>
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 7,
-              background: "#E8F0FF",
-              color: "#1B6EF3",
-              fontSize: 13,
-              fontWeight: 700,
-              borderRadius: 999,
-              padding: "6px 12px",
-              marginBottom: 20,
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#1B6EF3", flexShrink: 0 }} />
-            {isAr ? "+35 متجر ومنصة" : "35+ stores & marketplaces"}
-          </span>
-          <h2
-            style={{
-              fontSize: "clamp(24px, 3vw, 36px)",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              color: "#14181F",
-              marginBottom: 12,
-            }}
-          >
-            {isAr ? "يتصل بمتجرك بضغطة واحدة" : "Plugs into your store instantly"}
-          </h2>
-          <p style={{ fontSize: 16, color: "#5A6573", lineHeight: 1.55 }}>
-            {isAr
-              ? "اربط متجرك الحالي بنقرة واحدة — دون الحاجة إلى مطورين."
-              : "Connect your existing store in one click — no developers required."}
-          </p>
+    <section id="int" className="bg-muted/40 px-6 py-23">
+      <div className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-start">
 
-          {/* Hub indicator */}
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 16,
-              marginTop: 28,
-              padding: "14px 18px",
-              background: "#fff",
-              borderRadius: 14,
-              border: "1px solid #EEF1F6",
-              maxWidth: 340,
-            }}
-          >
-            <div
-              style={{
-                width: 44,
-                height: 44,
-                background: "#1B6EF3",
-                borderRadius: 12,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                flexShrink: 0,
-              }}
-            >
-              <span style={{ fontSize: 12, fontWeight: 800, color: "#fff" }}>izi</span>
+          {/* Left: heading + CTA */}
+          <div>
+            <p className="mb-3 text-[13px] font-extrabold uppercase tracking-[0.12em] text-primary">
+              {t("kicker")}
+            </p>
+            <h2 className="mb-5 text-[clamp(26px,3.5vw,40px)] font-extrabold tracking-tight text-foreground">
+              {t("h2")}
+            </h2>
+            <p className="mb-8 max-w-110 text-[17px] leading-[1.6] text-muted-foreground">
+              {t("sub")}
+            </p>
+
+            <div className="mb-8 flex flex-col gap-3">
+              {BULLET_ICONS.map((icon, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <span className="mt-0.5 text-[18px] leading-none">{icon}</span>
+                  <span className="text-[15px] leading-normal text-foreground/80">
+                    {t(`bullets.${idx}`)}
+                  </span>
+                </div>
+              ))}
             </div>
-            <div>
-              <p style={{ fontSize: 13, fontWeight: 700, color: "#14181F", margin: 0 }}>iziship Hub</p>
-              <p style={{ fontSize: 12, color: "#AEB6C2", margin: 0 }}>
-                {isAr ? "نقطة تكامل مركزية واحدة" : "One central integration point"}
+
+            <div className="flex flex-wrap gap-2.5">
+              <Button
+                asChild
+                size="lg"
+                className="rounded-xl bg-accent font-bold text-accent-foreground shadow-[0_10px_24px_color-mix(in_oklch,var(--accent)_30%,transparent)] hover:bg-accent/90"
+              >
+                <a href="#cta">{t("ctaPrimary")}</a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="rounded-xl border-primary/25 font-bold hover:border-primary">
+                <a href="#" target="_blank" rel="noopener noreferrer">{t("ctaSecondary")}</a>
+              </Button>
+            </div>
+          </div>
+
+          {/* Right: hub grid */}
+          <div>
+            <div className="mb-4 flex items-center gap-2">
+              <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+                {t("storesLabel")}
               </p>
+              <Badge variant="outline" className="rounded-full text-[11px] font-bold">{STORE_META.length}</Badge>
             </div>
-            <div style={{ marginInlineStart: "auto" }}>
-              <span
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  color: "#16A34A",
-                  background: "#E9FBF0",
-                  borderRadius: 6,
-                  padding: "3px 8px",
-                }}
-              >
-                {isAr ? "متصل" : "Live"}
-              </span>
+            <div className="mb-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+              {STORE_META.map((s, idx) => (
+                <div key={idx} className="flex items-center gap-3 rounded-[14px] border border-border bg-card px-4 py-3 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_14px_oklch(0.148_0.012_253/7%)]">
+                  <div className={`flex size-10 shrink-0 items-center justify-center rounded-[10px] text-[13px] font-extrabold ${s.bg} ${s.fg}`}>
+                    {s.mark}
+                  </div>
+                  <span className="text-[14px] font-semibold text-foreground">{t(`stores.${idx}.name`)}</span>
+                </div>
+              ))}
             </div>
-          </div>
 
-          <NodeGrid items={STORES} />
-        </div>
-
-        {/* Right — carriers */}
-        <div>
-          <span
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 7,
-              background: "#FFF0EB",
-              color: "#FF6B2C",
-              fontSize: 13,
-              fontWeight: 700,
-              borderRadius: 999,
-              padding: "6px 12px",
-              marginBottom: 20,
-            }}
-          >
-            <span style={{ width: 6, height: 6, borderRadius: "50%", background: "#FF6B2C", flexShrink: 0 }} />
-            {isAr ? "+400 شركة شحن" : "400+ shipping carriers"}
-          </span>
-          <h2
-            style={{
-              fontSize: "clamp(24px, 3vw, 36px)",
-              fontWeight: 800,
-              letterSpacing: "-0.02em",
-              color: "#14181F",
-              marginBottom: 12,
-            }}
-          >
-            {isAr ? "أكبر شبكة ناقلين في المنطقة" : "The region's largest carrier network"}
-          </h2>
-          <p style={{ fontSize: 16, color: "#5A6573", lineHeight: 1.55 }}>
-            {isAr
-              ? "محليون وإقليميون — تغطية شاملة بسعر تنافسي."
-              : "Local and regional — comprehensive coverage at competitive rates."}
-          </p>
-
-          {/* Carrier stats row */}
-          <div
-            style={{
-              display: "flex",
-              gap: 16,
-              marginTop: 28,
-              marginBottom: 0,
-            }}
-          >
-            {[
-              { num: "98%", label: isAr ? "التسليم في الوقت" : "On-time delivery" },
-              { num: "400+", label: isAr ? "شركة شحن" : "Carriers" },
-            ].map((stat) => (
-              <div
-                key={stat.num}
-                style={{
-                  padding: "14px 18px",
-                  background: "#fff",
-                  borderRadius: 14,
-                  border: "1px solid #EEF1F6",
-                }}
-              >
-                <p
-                  style={{
-                    fontSize: 22,
-                    fontWeight: 800,
-                    color: "#1B6EF3",
-                    margin: 0,
-                    lineHeight: 1,
-                  }}
-                >
-                  {stat.num}
-                </p>
-                <p style={{ fontSize: 12, color: "#AEB6C2", margin: "4px 0 0", fontWeight: 600 }}>
-                  {stat.label}
-                </p>
+            {/* Connector */}
+            <div className="relative my-2 flex items-center">
+              <div className="h-px flex-1 bg-border" />
+              <div className="mx-3 flex size-10 items-center justify-center rounded-full border-2 border-primary bg-primary/10 text-xs font-extrabold text-primary shadow-[0_0_0_6px_oklch(0.541_0.233_258/8%)]">
+                izi
               </div>
-            ))}
-          </div>
+              <div className="h-px flex-1 bg-border" />
+            </div>
 
-          <CarrierGrid items={CARRIERS} />
+            <div className="mb-4 mt-6 flex items-center gap-2">
+              <p className="text-[13px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+                {t("carriersLabel")}
+              </p>
+              <Badge variant="outline" className="rounded-full text-[11px] font-bold">400+</Badge>
+            </div>
+            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+              {CARRIER_META.map((c, idx) => (
+                <div key={idx} className="flex items-center gap-3 rounded-[14px] border border-border bg-card px-4 py-3 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-[0_4px_14px_oklch(0.148_0.012_253/7%)]">
+                  <div className={`flex size-10 shrink-0 items-center justify-center rounded-[10px] text-[13px] font-extrabold ${c.bg} ${c.fg}`}>
+                    {c.mark}
+                  </div>
+                  <span className="text-[14px] font-semibold text-foreground">{t(`carriers.${idx}.name`)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
-
-      <style>{`
-        @media (max-width: 768px) {
-          .int-grid { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </section>
   );
 }

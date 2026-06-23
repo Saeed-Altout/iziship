@@ -1,1 +1,237 @@
-{}
+{
+  "nav": {
+    "links": {
+      "howItWorks": "How it works",
+      "features": "Features",
+      "forMerchants": "For merchants",
+      "forCarriers": "For carriers",
+      "integrations": "Integrations"
+    },
+    "cta": "Start Free",
+    "langToggle": "ع"
+  },
+  "hero": {
+    "badge": "Syria's first logistics network",
+    "h1": "One dashboard for all your {highlight}",
+    "h1Highlight": "shipments",
+    "sub": "Connect multiple shipping companies, track in real time, and collect cash on delivery — built for merchants in Syria and the region.",
+    "cta1": "Start Free",
+    "cta2": "See how it works",
+    "note": "No setup fee · Cancel anytime",
+    "card": {
+      "label": "LIVE SHIPMENT",
+      "status": "In delivery · Damascus"
+    }
+  },
+  "howItWorks": {
+    "kicker": "HOW IT WORKS",
+    "h2": "From order to doorstep in three steps",
+    "steps": [
+      {
+        "title": "Merchant creates an order",
+        "desc": "Add a shipment in seconds — from your dashboard or straight from your store."
+      },
+      {
+        "title": "We match the best carrier",
+        "desc": "Compare price, speed and coverage across carriers, instantly and automatically."
+      },
+      {
+        "title": "Track live & collect COD",
+        "desc": "Follow all five stages and get cash on delivery settled to your wallet."
+      }
+    ]
+  },
+  "features": {
+    "kicker": "FEATURES",
+    "h2": "Everything you need to ship and get paid",
+    "items": [
+      {
+        "title": "Multi-carrier comparison",
+        "desc": "Compare every carrier's price and speed in one view."
+      },
+      {
+        "title": "5-stage live tracking",
+        "desc": "Real-time status from pickup all the way to the doorstep."
+      },
+      {
+        "title": "COD & wallet",
+        "desc": "Collect cash on delivery and settle straight to your wallet."
+      },
+      {
+        "title": "Returns management",
+        "desc": "Handle returns without phone calls or paperwork."
+      },
+      {
+        "title": "Store integrations",
+        "desc": "WooCommerce, Salla, Zid and custom stores in one click."
+      },
+      {
+        "title": "Bilingual dashboard",
+        "desc": "Full Arabic and English — switch anytime."
+      }
+    ]
+  },
+  "priceCalculator": {
+    "kicker": "LIVE PLATFORM",
+    "h2": "Compare all shipping companies in one screen",
+    "searchPlaceholder": "Search for a shipment",
+    "createBtn": "+ Create shipment",
+    "calcTitle": "Price Calculator",
+    "route": "Damascus → Aleppo · Shipping Options",
+    "proPlan": "Pro Plan",
+    "columns": {
+      "carrier": "Carrier",
+      "serviceType": "Service Type",
+      "deliveryTime": "Delivery Time",
+      "delivery": "Delivery",
+      "price": "Price"
+    },
+    "actionLabel": "Create",
+    "trust": "Trusted by 10,000+ businesses across the region",
+    "carriersNum": "400+",
+    "carriersLabel": "carriers",
+    "carriers": [
+      {
+        "service": "Express",
+        "eta": "1–2 business days",
+        "delivery": "To door"
+      },
+      {
+        "service": "Express",
+        "eta": "1–3 business days",
+        "delivery": "To door"
+      },
+      {
+        "service": "Standard",
+        "eta": "2–3 business days",
+        "delivery": "To door"
+      },
+      {
+        "service": "Express",
+        "eta": "1–3 business days",
+        "delivery": "Branch"
+      },
+      {
+        "service": "Standard",
+        "eta": "2–4 business days",
+        "delivery": "To door"
+      }
+    ]
+  },
+  "journey": {
+    "kicker": "SHIPMENT JOURNEY",
+    "h2": "From order to wallet",
+    "stages": [
+      {
+        "title": "Create shipment",
+        "desc": "Fill in recipient, weight, and dimensions — under 30 seconds from your dashboard or API.",
+        "badge": "Order created",
+        "formTitle": "New Shipment",
+        "formContinue": "Continue",
+        "formFields": ["Recipient name", "Address", "Weight (kg)"]
+      },
+      {
+        "title": "Choose carrier",
+        "desc": "See a ranked list of carriers sorted by price, ETA, and rating. Pick or let iziship auto-route.",
+        "badge": "Best match found",
+        "compareTitle": "Compare Carriers",
+        "comparePick": "Pick"
+      },
+      {
+        "title": "Print label & hand off",
+        "desc": "Generate a thermal or standard label in one click. Schedule a pickup or drop at the nearest branch.",
+        "badge": "Label printed",
+        "labelThermal": "Thermal",
+        "labelPdf": "PDF Print"
+      },
+      {
+        "title": "Live tracking",
+        "desc": "Both you and your customer get real-time status updates through all five stages.",
+        "badge": "Delivered",
+        "trackRoute": "Damascus → Aleppo",
+        "trackStages": ["Created", "Picked up", "In transit", "Out for delivery", "Delivered"]
+      },
+      {
+        "title": "Collect & settle",
+        "desc": "COD amounts settle directly to your iziship wallet. Withdraw at any time.",
+        "badge": "Settled to wallet",
+        "walletLabel": "Wallet Balance",
+        "walletCod": "Last COD: Today",
+        "walletHistory": "History",
+        "walletWithdraw": "Withdraw"
+      }
+    ]
+  },
+  "integrations": {
+    "kicker": "INTEGRATIONS",
+    "h2": "Your store already runs? Connect it in two minutes",
+    "sub": "iziship connects with major platforms and supports a custom API for bespoke stores — no complex code.",
+    "bullets": [
+      "One-click OAuth connection for Salla, Zid, and WooCommerce",
+      "Orders sync automatically, no manual imports",
+      "Shipment status pushed back to your store"
+    ],
+    "ctaPrimary": "Start connecting now",
+    "ctaSecondary": "API Docs",
+    "storesLabel": "STORES",
+    "carriersLabel": "CARRIERS",
+    "stores": [
+      { "name": "WooCommerce" },
+      { "name": "Salla" },
+      { "name": "Zid" },
+      { "name": "Magento" },
+      { "name": "Shopify" },
+      { "name": "Custom API" }
+    ],
+    "carriers": [
+      { "name": "Bosta" },
+      { "name": "Aramex" },
+      { "name": "SMSA" },
+      { "name": "Naqel" },
+      { "name": "Fardar" },
+      { "name": "400+ more" }
+    ]
+  },
+  "audience": {
+    "merchants": {
+      "kicker": "For merchants",
+      "h3": "Stop juggling five shipping companies",
+      "bullets": [
+        "One dashboard for every order and every carrier",
+        "Cash on delivery, settled fast to your wallet",
+        "Lower rates through real carrier competition",
+        "Returns and tracking handled in one place"
+      ],
+      "cta": "Start shipping free"
+    },
+    "carriers": {
+      "kicker": "For carriers",
+      "h3": "A steady stream of merchant orders",
+      "bullets": [
+        "Reach merchants actively looking to ship",
+        "Manage every order from one tech platform",
+        "Smart routing and automatic assignment",
+        "Grow your volume without a sales team"
+      ],
+      "cta": "Join as a carrier"
+    }
+  },
+  "stats": {
+    "items": [
+      { "num": "10+", "label": "Shipping carriers" },
+      { "num": "500+", "label": "Active merchants" },
+      { "num": "98%", "label": "On-time delivery" },
+      { "num": "5", "label": "Live tracking stages" }
+    ]
+  },
+  "cta": {
+    "h2": "Built for your market. Start free today.",
+    "sub": "Join the merchants shipping smarter across Syria and MENA.",
+    "primary": "Get Started Free",
+    "secondary": "Talk to us"
+  },
+  "footer": {
+    "tagline": "Syria's first multi-carrier logistics platform — built for merchants who ship COD.",
+    "copyright": "© 2026 iziship. All rights reserved."
+  }
+}

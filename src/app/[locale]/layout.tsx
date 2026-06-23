@@ -29,8 +29,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "IZI Ship",
-  description: "A shipping management system",
+  title: "iziship — Shipping, made izi.",
+  description: "Syria's first multi-carrier logistics platform. Connect shipping companies, track in real time, and collect cash on delivery.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 interface LocaleLayoutProps {
