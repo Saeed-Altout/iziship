@@ -106,9 +106,6 @@ export function HeroSection() {
             </Button>
           </div>
 
-          <p className="mt-3.5 text-[13px] font-medium text-muted-foreground/60">
-            {t("note")}
-          </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-border pt-6">
             {[
