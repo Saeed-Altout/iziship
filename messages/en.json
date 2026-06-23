@@ -17,8 +17,7 @@
   },
   "hero": {
     "badge": "Syria's first logistics network",
-    "h1": "One dashboard for all your {highlight}",
-    "h1Highlight": "shipments",
+    "h1": "One dashboard for all your <highlight>shipments</highlight>",
     "sub": "Connect multiple shipping companies, track in real time, and collect cash on delivery — built for merchants in Syria and the region.",
     "cta1": "Start Free",
     "cta2": "See how it works",
