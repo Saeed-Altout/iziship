@@ -8,5 +8,5 @@
     </g>
     <circle cx="70" cy="30" r="8.5" fill="#FF6B2C"></circle>
   </g>
-  <text id="wordmark" x="124" y="73" font-family="'Plus Jakarta Sans',sans-serif" font-size="56" letter-spacing="-1.5" fill="#FFFFFF"><tspan font-weight="500">izi</tspan><tspan font-weight="700">ship</tspan></text>
+  <text id="wordmark" x="124" y="73" font-family="'Plus Jakarta Sans',sans-serif" font-size="56" letter-spacing="-1.5" fill="#FFFFFF"><tspan font-weight="700">iziship</tspan></text>
 </svg>

@@ -1,4 +1,9 @@
 {
+  "banner": {
+    "text": "iziship is launching in Syria — join the waitlist and get early access.",
+    "cta": "Join waitlist",
+    "close": "Dismiss"
+  },
   "nav": {
     "links": {
       "howItWorks": "How it works",

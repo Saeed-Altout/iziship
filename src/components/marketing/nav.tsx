@@ -1,116 +1,158 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useRouter, usePathname } from "@/i18n/navigation";
 import { useLocale } from "next-intl";
-import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
+import { useScroll } from "@/hooks/use-scroll";
+import { getSheetSide } from "@/lib/i18n";
+import { type ILocale } from "@/i18n/routing";
+
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { LangToggle } from "@/components/marketing/lang-toggle";
 
 export function MarketingNav() {
   const t = useTranslations("nav");
-  const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const isAr = locale === "ar";
+  const scrolled = useScroll(8);
+  const locale = useLocale() as ILocale;
 
   const links = [
-    { label: t("links.howItWorks"),   href: "#how" },
-    { label: t("links.features"),     href: "#features" },
+    { label: t("links.howItWorks"), href: "#how" },
+    { label: t("links.features"), href: "#features" },
     { label: t("links.forMerchants"), href: "#audience" },
-    { label: t("links.forCarriers"),  href: "#audience" },
+    { label: t("links.forCarriers"), href: "#audience" },
     { label: t("links.integrations"), href: "#int" },
   ];
-
-  function toggleLang() {
-    router.replace(pathname, { locale: isAr ? "en" : "ar" });
-  }
 
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b border-border transition-all",
-        scrolled ? "bg-background/92 backdrop-saturate-180 backdrop-blur-md" : "bg-background/98"
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled
+          ? "border-b border-border bg-background/80 backdrop-blur-md backdrop-saturate-180"
+          : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-6 px-6">
-        <a href="#" className="shrink-0" dir="ltr">
-          <Image src="/logo.svg" alt="iziship" width={130} height={36} priority className="h-9 w-auto" />
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-6">
+        {/* Logo */}
+        <a href="#" className="me-4 shrink-0" dir="ltr">
+          <Image
+            src="/logo.svg"
+            alt="iziship"
+            width={130}
+            height={36}
+            priority
+            className="h-9 w-auto"
+          />
         </a>
 
-        <nav className="ms-auto hidden items-center gap-1 md:flex">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className="rounded-lg px-3 py-1.5 text-[14.5px] font-semibold text-muted-foreground transition-colors hover:text-primary"
-            >
-              {l.label}
-            </a>
-          ))}
-        </nav>
+        {/* Desktop nav */}
+        <NavigationMenu viewport={false} className="hidden md:flex">
+          <NavigationMenuList className="gap-0">
+            {links.map((l) => (
+              <NavigationMenuItem key={l.label}>
+                <NavigationMenuLink
+                  asChild
+                  className={cn(
+                    navigationMenuTriggerStyle(),
+                    "bg-transparent text-[14px] font-medium text-muted-foreground hover:bg-transparent hover:text-foreground focus:bg-transparent data-popup-open:bg-transparent data-open:bg-transparent",
+                  )}
+                >
+                  <a href={l.href}>{l.label}</a>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-        <div className="ms-auto flex items-center gap-2 md:ms-0">
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={toggleLang}
-            className="rounded-lg bg-primary/10 font-bold text-primary hover:bg-primary hover:text-primary-foreground"
-            dir="ltr"
-          >
-            {t("langToggle")}
-          </Button>
+        {/* Spacer */}
+        <div className="flex-1" />
 
-          <Button
-            asChild
-            size="sm"
-            className="rounded-xl bg-accent font-bold text-accent-foreground shadow-[0_8px_20px_color-mix(in_oklch,var(--accent)_30%,transparent)] hover:bg-accent/90"
-          >
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          <LangToggle className="hidden md:inline-flex" />
+
+          <Button asChild size="sm" className="hidden md:inline-flex">
             <a href="#cta">{t("cta")}</a>
           </Button>
 
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            className="md:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              {menuOpen ? (
-                <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              ) : (
-                <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              )}
-            </svg>
-          </Button>
+          {/* Mobile sheet trigger */}
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="md:hidden"
+                aria-label="Toggle menu"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M3 5h14M3 10h14M3 15h14"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </Button>
+            </SheetTrigger>
+
+            <SheetContent
+              side={getSheetSide(locale)}
+              className="flex flex-col p-0"
+            >
+              <SheetHeader className="border-b border-border px-6 py-4">
+                <SheetTitle asChild>
+                  <a href="#" dir="ltr">
+                    <Image
+                      src="/logo.svg"
+                      alt="iziship"
+                      width={110}
+                      height={32}
+                      className="h-8 w-auto"
+                    />
+                  </a>
+                </SheetTitle>
+              </SheetHeader>
+
+              <nav className="flex flex-col px-4 py-3">
+                {links.map((l) => (
+                  <SheetClose asChild key={l.label}>
+                    <a
+                      href={l.href}
+                      className="rounded-md px-3 py-2.5 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+                    >
+                      {l.label}
+                    </a>
+                  </SheetClose>
+                ))}
+              </nav>
+
+              <div className="mt-auto flex flex-col gap-2 border-t border-border px-6 py-4">
+                <Button asChild size="sm">
+                  <a href="#cta">{t("cta")}</a>
+                </Button>
+                <LangToggle size="sm" className="w-full" />
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
       </div>
-
-      {menuOpen && (
-        <div className="border-t border-border bg-background px-6 pb-5 pt-3 md:hidden">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              onClick={() => setMenuOpen(false)}
-              className="block border-b border-border py-2.5 text-[15px] font-semibold text-muted-foreground last:border-0 hover:text-primary"
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
-      )}
     </header>
   );
 }

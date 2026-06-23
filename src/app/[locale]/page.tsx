@@ -1,3 +1,4 @@
+import { MarketingBanner } from "@/components/marketing/banner";
 import { MarketingNav } from "@/components/marketing/nav";
 import { HeroSection } from "@/components/marketing/hero";
 import { PriceCalculatorSection } from "@/components/marketing/price-calculator";
@@ -15,6 +16,7 @@ import {
 export default function MarketingPage() {
   return (
     <div style={{ fontFamily: "'Plus Jakarta Sans', 'Cairo', 'Tajawal', sans-serif", WebkitFontSmoothing: "antialiased" }}>
+      <MarketingBanner />
       <MarketingNav />
       <main>
         <HeroSection />
