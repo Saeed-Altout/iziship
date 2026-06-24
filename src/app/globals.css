@@ -219,10 +219,6 @@
   }
   body {
     @apply bg-background text-foreground;
-    background-image:
-      linear-gradient(to right, oklch(0.925 0.008 253 / 40%) 1px, transparent 1px),
-      linear-gradient(to bottom, oklch(0.925 0.008 253 / 40%) 1px, transparent 1px);
-    background-size: 5rem 5rem;
   }
   button:not(:disabled), [role="button"]:not(:disabled) {
     cursor: pointer;
