@@ -27,36 +27,6 @@
       "status": "In delivery · Damascus"
     }
   },
-  "integrations": {
-    "kicker": "INTEGRATIONS",
-    "h2": "Your store already runs? Connect it in two minutes",
-    "sub": "iziship connects with major platforms and supports a custom API for bespoke stores — no complex code.",
-    "bullets": [
-      "One-click OAuth connection for Salla, Zid, and WooCommerce",
-      "Orders sync automatically, no manual imports",
-      "Shipment status pushed back to your store"
-    ],
-    "ctaPrimary": "Start connecting now",
-    "ctaSecondary": "API Docs",
-    "storesLabel": "STORES",
-    "carriersLabel": "CARRIERS",
-    "stores": [
-      { "name": "WooCommerce" },
-      { "name": "Salla" },
-      { "name": "Zid" },
-      { "name": "Magento" },
-      { "name": "Shopify" },
-      { "name": "Custom API" }
-    ],
-    "carriers": [
-      { "name": "Bosta" },
-      { "name": "Aramex" },
-      { "name": "SMSA" },
-      { "name": "Naqel" },
-      { "name": "Fardar" },
-      { "name": "400+ more" }
-    ]
-  },
   "audience": {
     "kicker": "Who iziship is built for",
     "h2": "Every side finds exactly what it needs",
