@@ -237,5 +237,12 @@
   "footer": {
     "tagline": "Syria's first multi-carrier logistics platform — built for merchants who ship COD.",
     "copyright": "© 2026 iziship. All rights reserved."
+  },
+  "smartRouting": {
+    "badge": "Smart Routing",
+    "h2": "One engine. The best carrier, every time.",
+    "sub": "Your orders stream in from every sales channel. iziship picks the optimal carrier automatically — no manual rules, no guesswork.",
+    "selecting": "Selecting",
+    "bestRoute": "Best Route"
   }
 }

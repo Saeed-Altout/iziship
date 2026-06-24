@@ -49,7 +49,7 @@ export function FeaturesSection() {
   const t = useTranslations("features");
 
   return (
-    <section id="features" className="bg-muted/40 px-6 py-23">
+    <section id="features" className="px-6 py-23">
       <div className="mx-auto max-w-7xl">
 
         <div className="mb-12 max-w-160">

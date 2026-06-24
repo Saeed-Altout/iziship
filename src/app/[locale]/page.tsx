@@ -1,6 +1,7 @@
 import { MarketingBanner } from "@/components/marketing/banner";
 import { MarketingNav } from "@/components/marketing/nav";
 import { HeroSection } from "@/components/marketing/hero";
+import { SmartRoutingSection } from "@/components/marketing/smart-routing";
 import { PriceCalculatorSection } from "@/components/marketing/price-calculator";
 import { HowItWorksSection } from "@/components/marketing/how-it-works";
 import { FeaturesSection } from "@/components/marketing/features";
@@ -20,6 +21,7 @@ export default function MarketingPage() {
       <MarketingNav />
       <main>
         <HeroSection />
+        <SmartRoutingSection />
         <PriceCalculatorSection />
         <HowItWorksSection />
         <FeaturesSection />

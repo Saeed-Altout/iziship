@@ -35,7 +35,7 @@ export function AudienceSplitSection() {
   const carrierBullets  = [0, 1, 2, 3].map((i) => t(`carriers.bullets.${i}`));
 
   return (
-    <section id="audience" className="bg-background px-6 py-23">
+    <section id="audience" className="px-6 py-23">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-7 md:grid-cols-2">
 
         {/* Merchants */}
@@ -79,7 +79,7 @@ export function StatsBarSection() {
   const t = useTranslations("stats");
 
   return (
-    <section className="bg-muted/50 px-6 py-16">
+    <section className="px-6 py-16">
       <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-12">
         {[0, 1, 2, 3].map((i) => (
           <div key={i} className="text-center">

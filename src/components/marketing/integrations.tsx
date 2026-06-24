@@ -28,7 +28,7 @@ export function IntegrationsSection() {
   const t = useTranslations("integrations");
 
   return (
-    <section id="int" className="bg-muted/40 px-6 py-23">
+    <section id="int" className="px-6 py-23">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2 lg:items-start">
 
