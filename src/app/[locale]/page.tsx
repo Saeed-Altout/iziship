@@ -4,10 +4,6 @@ import { HeroSection } from "@/components/marketing/hero";
 import { SmartRoutingSection } from "@/components/marketing/smart-routing";
 import { AudienceDualCTASection } from "@/components/marketing/audience-dual-cta";
 import { PlatformFeaturesSection } from "@/components/marketing/platform-features";
-import { PriceCalculatorSection } from "@/components/marketing/price-calculator";
-import { HowItWorksSection } from "@/components/marketing/how-it-works";
-import { FeaturesSection } from "@/components/marketing/features";
-import { JourneyStepperSection } from "@/components/marketing/journey-stepper";
 import { IntegrationsSection } from "@/components/marketing/integrations";
 import {
   StatsBarSection,
@@ -25,10 +21,6 @@ export default function MarketingPage() {
         <SmartRoutingSection />
         <AudienceDualCTASection />
         <PlatformFeaturesSection />
-        <PriceCalculatorSection />
-        <HowItWorksSection />
-        <FeaturesSection />
-        <JourneyStepperSection />
         <IntegrationsSection />
         <StatsBarSection />
         <CTASection />
