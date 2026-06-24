@@ -59,6 +59,7 @@
     }
   },
   "stats": {
+    "tagline": "Powering logistics across Syria and MENA",
     "items": [
       { "num": "10+", "label": "Shipping carriers" },
       { "num": "500+", "label": "Active merchants" },
@@ -70,11 +71,57 @@
     "h2": "Built for your market. Start free today.",
     "sub": "Join the merchants shipping smarter across Syria and MENA.",
     "primary": "Get Started Free",
-    "secondary": "Talk to us"
+    "secondary": "Talk to us",
+    "trust": "No credit card required · Cancel anytime"
+  },
+  "contact": {
+    "kicker": "GET STARTED",
+    "h2": "Start shipping with iziship today",
+    "sub": "Fill in your details and our team will reach out within 24 hours to get you set up on the platform.",
+    "perks": [
+      "Full platform access — no commitment",
+      "Free onboarding session for your team",
+      "Dedicated technical support throughout your trial"
+    ],
+    "formTitle": "Request free access",
+    "fields": {
+      "name": "Full name",
+      "phone": "Phone number",
+      "email": "Email (optional)",
+      "businessType": "Business type"
+    },
+    "placeholders": {
+      "name": "Mohammed Ahmed",
+      "phone": "+963 9XX XXX XXX",
+      "email": "example@domain.com",
+      "businessType": "Select type"
+    },
+    "businessTypes": {
+      "merchant": "Merchant / Online store",
+      "carrier": "Shipping carrier",
+      "both": "Both"
+    },
+    "submit": "Request free access",
+    "privacy": "Your data is safe — we never share it with third parties."
   },
   "footer": {
     "tagline": "Syria's first multi-carrier logistics platform — built for merchants who ship COD.",
-    "copyright": "© 2026 iziship. All rights reserved."
+    "copyright": "© 2026 iziship. All rights reserved.",
+    "status": "All systems operational",
+    "links": {
+      "product": {
+        "title": "Product",
+        "items": ["Features", "Pricing", "Integrations"]
+      },
+      "company": {
+        "title": "Company",
+        "items": ["About", "Blog", "Careers"]
+      },
+      "legal": {
+        "title": "Legal",
+        "items": ["Privacy Policy", "Terms of Service", "Cookie Policy"]
+      }
+    }
   },
   "platformFeatures": {
     "kicker": "PLATFORM FEATURES",

@@ -4,11 +4,10 @@ import { HeroSection } from "@/components/marketing/hero";
 import { SmartRoutingSection } from "@/components/marketing/smart-routing";
 import { AudienceDualCTASection } from "@/components/marketing/audience-dual-cta";
 import { PlatformFeaturesSection } from "@/components/marketing/platform-features";
-import {
-  StatsBarSection,
-  CTASection,
-  MarketingFooter,
-} from "@/components/marketing/audience-stats-cta-footer";
+import { StatsBarSection } from "@/components/marketing/stats-bar";
+import { CTASection } from "@/components/marketing/cta-section";
+import { ContactSection } from "@/components/marketing/contact-section";
+import { MarketingFooter } from "@/components/marketing/footer";
 
 export default function MarketingPage() {
   return (
@@ -22,6 +21,7 @@ export default function MarketingPage() {
         <PlatformFeaturesSection />
         <StatsBarSection />
         <CTASection />
+        <ContactSection />
       </main>
       <MarketingFooter />
     </div>

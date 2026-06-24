@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 
@@ -38,7 +37,7 @@ function ArrowIcon() {
 function PackageGlyph() {
   return (
     <svg
-      className="pointer-events-none absolute -start-5 -bottom-6 opacity-[0.055] transition-[opacity,transform] duration-300 group-hover:opacity-[0.085] group-hover:translate-y-[-6px] group-hover:scale-105"
+      className="pointer-events-none absolute -inset-s-5 -bottom-6 opacity-[0.055] transition-[opacity,transform] duration-300 group-hover:opacity-[0.085] group-hover:-translate-y-1.5 group-hover:scale-105"
       width="260" height="260" viewBox="0 0 260 260" fill="none" aria-hidden="true"
     >
       <path d="M130 28L232 82L232 178L130 232L28 178L28 82Z" stroke="var(--color-primary)" strokeWidth="5" />
@@ -56,7 +55,7 @@ function PackageGlyph() {
 function NetworkGlyph() {
   return (
     <svg
-      className="pointer-events-none absolute -start-5 -bottom-6 opacity-[0.065] transition-[opacity,transform] duration-300 group-hover:opacity-[0.1] group-hover:translate-y-[-6px] group-hover:scale-105"
+      className="pointer-events-none absolute -inset-s-5 -bottom-6 opacity-[0.065] transition-[opacity,transform] duration-300 group-hover:opacity-[0.1] group-hover:-translate-y-1.5 group-hover:scale-105"
       width="280" height="280" viewBox="0 0 280 280" fill="none" aria-hidden="true"
     >
       <circle cx="140" cy="60" r="14" stroke="var(--color-accent)" strokeWidth="4" />
@@ -102,12 +101,12 @@ export function AudienceSplitSection() {
           <div className="group relative isolate cursor-default overflow-hidden rounded-[28px] border border-border bg-card p-[clamp(32px,4vw,52px)] shadow-[0_2px_0_oklch(0.148_0.012_253/3%),0_8px_28px_oklch(0.541_0.233_258/7%)] transition-all duration-300 ease-out hover:scale-[1.03] hover:border-primary/20 hover:shadow-[0_32px_72px_oklch(0.541_0.233_258/14%)]">
 
             {/* Hover accent bar */}
-            <span className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+            <span className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
 
             <PackageGlyph />
 
             {/* Kicker */}
-            <span className="mb-6 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.1em] text-primary">
+            <span className="mb-6 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-primary">
               <span className="size-1.5 rounded-full bg-primary" aria-hidden="true" />
               {t("merchants.kicker")}
             </span>
@@ -123,7 +122,7 @@ export function AudienceSplitSection() {
             <div className="mb-7 flex flex-wrap gap-2">
               {[0, 1, 2].map((i) => (
                 <span key={i} className="inline-flex items-center gap-1.5 rounded-lg bg-primary/7 px-2.5 py-1 text-[12px] font-bold text-primary/80">
-                  <span className="size-[5px] rounded-full bg-primary" aria-hidden="true" />
+                  <span className="size-1.25 rounded-full bg-primary" aria-hidden="true" />
                   {t(`merchants.chips.${i}`)}
                 </span>
               ))}
@@ -131,7 +130,7 @@ export function AudienceSplitSection() {
 
             <ul className="mb-9 flex flex-col gap-3" role="list">
               {merchantBullets.map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-[14.5px] font-semibold leading-[1.5] text-foreground">
+                <li key={i} className="flex items-start gap-2.5 text-[14.5px] font-semibold leading-normal text-foreground">
                   <CheckIcon variant="primary" />
                   {item}
                 </li>
@@ -163,12 +162,12 @@ export function AudienceSplitSection() {
             />
 
             {/* Hover accent bar */}
-            <span className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
+            <span className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" aria-hidden="true" />
 
             <NetworkGlyph />
 
             {/* Kicker */}
-            <span className="mb-6 inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.1em] text-[#FF9A6C]">
+            <span className="mb-6 inline-flex items-center gap-1.5 rounded-full bg-accent/15 px-3 py-1 text-[11px] font-extrabold uppercase tracking-widest text-[#FF9A6C]">
               <span className="size-1.5 rounded-full bg-accent" aria-hidden="true" />
               {t("carriers.kicker")}
             </span>
@@ -184,7 +183,7 @@ export function AudienceSplitSection() {
             <div className="mb-7 flex flex-wrap gap-2">
               {[0, 1, 2].map((i) => (
                 <span key={i} className="inline-flex items-center gap-1.5 rounded-lg bg-white/7 px-2.5 py-1 text-[12px] font-bold text-[rgba(240,244,255,0.75)]">
-                  <span className="size-[5px] rounded-full bg-accent" aria-hidden="true" />
+                  <span className="size-1.25 rounded-full bg-accent" aria-hidden="true" />
                   {t(`carriers.chips.${i}`)}
                 </span>
               ))}
@@ -192,7 +191,7 @@ export function AudienceSplitSection() {
 
             <ul className="mb-9 flex flex-col gap-3" role="list">
               {carrierBullets.map((item, i) => (
-                <li key={i} className="flex items-start gap-2.5 text-[14.5px] font-semibold leading-[1.5] text-[rgba(240,244,255,0.82)]">
+                <li key={i} className="flex items-start gap-2.5 text-[14.5px] font-semibold leading-normal text-[rgba(240,244,255,0.82)]">
                   <CheckIcon variant="accent" />
                   {item}
                 </li>
@@ -217,89 +216,3 @@ export function AudienceSplitSection() {
   );
 }
 
-/* ── Stats Bar ──────────────────────────────────────────────────────── */
-export function StatsBarSection() {
-  const t = useTranslations("stats");
-
-  return (
-    <section className="px-6 py-16">
-      <div className="mx-auto flex max-w-7xl flex-wrap justify-center gap-12">
-        {[0, 1, 2, 3].map((i) => (
-          <div key={i} className="text-center">
-            <p className="text-[48px] font-extrabold leading-none text-primary">
-              {t(`items.${i}.num`)}
-            </p>
-            <p className="mt-1.5 text-[15px] font-semibold text-muted-foreground">
-              {t(`items.${i}.label`)}
-            </p>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* ── CTA Section ────────────────────────────────────────────────────── */
-export function CTASection() {
-  const t = useTranslations("cta");
-
-  return (
-    <section
-      id="cta"
-      className="px-6 py-24 text-center"
-      style={{
-        background:
-          "radial-gradient(900px 480px at 50% 0%, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 62%), var(--color-primary)",
-      }}
-    >
-      <div className="mx-auto max-w-7xl">
-        <h2 className="mb-4 text-[clamp(30px,4vw,48px)] font-extrabold tracking-[-0.03em] text-white">
-          {t("h2")}
-        </h2>
-        <p className="mx-auto mb-8 max-w-130 text-[18px] leading-[1.55] text-white/75">
-          {t("sub")}
-        </p>
-        <div className="flex flex-wrap justify-center gap-3.5">
-          <Button
-            asChild
-            size="lg"
-            className="rounded-xl bg-white font-bold text-primary hover:bg-white/90"
-          >
-            <a href="#">{t("primary")}</a>
-          </Button>
-          <Button
-            asChild
-            variant="outline"
-            size="lg"
-            className="rounded-xl border-white/45 font-bold text-white hover:border-white/80 hover:bg-transparent hover:text-white"
-          >
-            <a href="#">{t("secondary")}</a>
-          </Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ── Footer ─────────────────────────────────────────────────────────── */
-export function MarketingFooter() {
-  const t = useTranslations("footer");
-
-  return (
-    <footer className="bg-[#0D1B2A] px-6 py-11">
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-6">
-        <div className="flex flex-col gap-2">
-          <div dir="ltr">
-            <Image src="/logo-dark.svg" alt="iziship" width={120} height={34} className="h-8.5 w-auto" />
-          </div>
-          <p className="max-w-105 text-[14px] leading-normal text-white/50">
-            {t("tagline")}
-          </p>
-        </div>
-        <p className="ms-auto text-[13px] text-white/40">
-          {t("copyright")}
-        </p>
-      </div>
-    </footer>
-  );
-}
