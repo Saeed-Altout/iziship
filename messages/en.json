@@ -197,9 +197,13 @@
     ]
   },
   "audience": {
+    "kicker": "Who iziship is built for",
+    "h2": "Every side finds exactly what it needs",
     "merchants": {
       "kicker": "For merchants",
-      "h3": "Stop juggling five shipping companies",
+      "h3": "You sell. Stop managing five carriers.",
+      "sub": "Connect your store to hundreds of shipping companies with one click and run every order from a single dashboard.",
+      "chips": ["Hundreds of carriers", "Competitive rates", "Live tracking"],
       "bullets": [
         "One dashboard for every order and every carrier",
         "Cash on delivery, settled fast to your wallet",
@@ -210,7 +214,9 @@
     },
     "carriers": {
       "kicker": "For carriers",
-      "h3": "A steady stream of merchant orders",
+      "h3": "You move freight. We fill your pipeline.",
+      "sub": "Manage your branches and rates from one platform and get a steady stream of merchants who need shipping now.",
+      "chips": ["New merchants daily", "Auto assignment", "Central control"],
       "bullets": [
         "Reach merchants actively looking to ship",
         "Manage every order from one tech platform",
