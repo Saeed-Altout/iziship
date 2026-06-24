@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/providers/query-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CookieConsent } from "@/components/marketing/cookie-consent";
 
 import "../globals.css";
 
@@ -75,6 +76,7 @@ export default async function LocaleLayout({
             >
               <TooltipProvider>{children}</TooltipProvider>
               <Toaster position={isRTL ? "bottom-left" : "bottom-right"} />
+              <CookieConsent />
             </ThemeProvider>
           </QueryProvider>
         </NextIntlClientProvider>

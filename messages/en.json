@@ -210,6 +210,165 @@
       }
     ]
   },
+  "cookieConsent": {
+    "ariaLabel": "Cookie consent",
+    "title": "We use cookies",
+    "body": "We use cookies to improve your experience, analyze site usage, and show relevant content. By accepting, you help us make iziship better for everyone.",
+    "learnMore": "Cookie Policy",
+    "accept": "Accept all",
+    "decline": "Decline"
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy Policy",
+      "description": "Learn how iziship collects, uses, and protects your personal data."
+    },
+    "kicker": "Legal",
+    "h1": "Privacy Policy",
+    "updated": "Last updated: June 24, 2026",
+    "intro": "iziship (\"we\", \"us\", or \"our\") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.",
+    "back": "Back to home",
+    "sections": {
+      "collection": {
+        "title": "1. Information We Collect",
+        "body": "We collect information you provide directly, such as your name, email address, phone number, and business details when you register or contact us. We also collect usage data automatically, including IP addresses, browser type, pages visited, and actions taken on the platform. Shipment data — including sender and recipient information, addresses, and delivery status — is collected as part of our core service."
+      },
+      "use": {
+        "title": "2. How We Use Your Information",
+        "body": "We use your information to provide, operate, and improve the iziship platform; to process shipments and facilitate COD payments; to communicate with you about your account, orders, and updates; to comply with legal obligations; and to detect and prevent fraud or misuse of our services."
+      },
+      "sharing": {
+        "title": "3. Information Sharing",
+        "body": "We share your information with shipping carriers you select in order to fulfill your shipments. We may also share data with service providers who assist us in operating the platform under strict confidentiality agreements. We do not sell your personal data to third parties. We may disclose information when required by law or to protect the rights and safety of iziship and its users."
+      },
+      "retention": {
+        "title": "4. Data Retention",
+        "body": "We retain your personal data for as long as your account is active or as needed to provide services. Shipment records are retained for a minimum of three years to comply with financial and legal obligations. You may request deletion of your data at any time, subject to our legal retention requirements."
+      },
+      "security": {
+        "title": "5. Data Security",
+        "body": "We implement industry-standard security measures including encryption in transit (TLS), access controls, and regular security reviews to protect your information. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security."
+      },
+      "rights": {
+        "title": "6. Your Rights",
+        "body": "You have the right to access, correct, or delete your personal data. You may also request a copy of the data we hold about you, object to processing, or withdraw consent where processing is based on consent. To exercise these rights, contact us at privacy@iziship.com."
+      },
+      "cookies": {
+        "title": "7. Cookies",
+        "body": "We use cookies and similar tracking technologies to improve your experience on our platform. Please see our Cookie Policy for detailed information about the types of cookies we use and how to manage them."
+      },
+      "changes": {
+        "title": "8. Changes to This Policy",
+        "body": "We may update this Privacy Policy from time to time. We will notify you of significant changes by email or by posting a notice on our platform. Continued use of iziship after changes are posted constitutes your acceptance of the updated policy."
+      },
+      "contact": {
+        "title": "9. Contact Us",
+        "body": "If you have questions or concerns about this Privacy Policy or our data practices, please contact us at privacy@iziship.com or write to us at: iziship — Legal Team, Damascus, Syria."
+      }
+    }
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms of Service",
+      "description": "Read iziship's Terms of Service before using our logistics platform."
+    },
+    "kicker": "Legal",
+    "h1": "Terms of Service",
+    "updated": "Last updated: June 24, 2026",
+    "intro": "These Terms of Service (\"Terms\") govern your access to and use of the iziship platform. By accessing or using our services, you agree to be bound by these Terms. If you do not agree, do not use the platform.",
+    "back": "Back to home",
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptance of Terms",
+        "body": "By creating an account or using any part of the iziship platform, you confirm that you are at least 18 years old, have the authority to enter into these Terms on behalf of yourself or your business, and agree to comply with all applicable laws and regulations."
+      },
+      "service": {
+        "title": "2. Description of Service",
+        "body": "iziship is a multi-carrier logistics platform that enables merchants to connect with shipping carriers, create and manage shipments, and collect cash on delivery. We act as an intermediary and are not a carrier ourselves. The actual shipment is handled by the carrier you select."
+      },
+      "accounts": {
+        "title": "3. Account Responsibilities",
+        "body": "You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to notify us immediately of any unauthorized use. iziship reserves the right to suspend or terminate accounts that violate these Terms."
+      },
+      "payments": {
+        "title": "4. Fees and Payments",
+        "body": "Fees for shipments are based on the carrier's rates plus any applicable iziship service fee, which is displayed before you confirm a shipment. All fees are non-refundable unless a shipment is cancelled before pickup. iziship may update its fee structure at any time with prior notice."
+      },
+      "cod": {
+        "title": "5. Cash on Delivery (COD)",
+        "body": "COD amounts collected by carriers are held and processed by iziship. Net amounts (after service fees) are credited to your iziship wallet following carrier settlement. Settlement timelines depend on carrier payment cycles and are displayed in your dashboard. iziship is not liable for delays caused by the carrier's settlement process."
+      },
+      "carriers": {
+        "title": "6. Carrier Relationships",
+        "body": "Carriers on the iziship platform are independent third parties. iziship does not control their operations, delivery performance, or handling of goods. Any disputes regarding lost, damaged, or delayed shipments must be raised directly with the carrier, with iziship providing audit data to assist resolution."
+      },
+      "prohibited": {
+        "title": "7. Prohibited Uses",
+        "body": "You may not use the platform to ship prohibited or illegal goods; to submit false, misleading, or fraudulent shipment information; to circumvent carrier terms or rate agreements; or to engage in any activity that disrupts or harms the platform or its users. Violations may result in immediate account termination."
+      },
+      "liability": {
+        "title": "8. Limitation of Liability",
+        "body": "To the maximum extent permitted by law, iziship is not liable for indirect, incidental, or consequential damages arising from your use of the platform, including lost profits or goods. Our total liability for any claim is limited to the fees paid by you to iziship in the 30 days preceding the claim."
+      },
+      "termination": {
+        "title": "9. Termination",
+        "body": "Either party may terminate the agreement at any time. You may close your account by contacting support. iziship may suspend or terminate your access immediately if you breach these Terms, without prior notice. Upon termination, your wallet balance will be settled according to our standard process."
+      },
+      "governing": {
+        "title": "10. Governing Law",
+        "body": "These Terms are governed by the laws of the Syrian Arab Republic. Any disputes arising out of or related to these Terms shall be subject to the exclusive jurisdiction of the competent courts in Damascus, Syria."
+      },
+      "changes": {
+        "title": "11. Changes to Terms",
+        "body": "We may revise these Terms at any time. Updated Terms will be posted on this page with the revised date. If changes are material, we will notify you via email. Your continued use of the platform constitutes acceptance of the new Terms."
+      },
+      "contact": {
+        "title": "12. Contact",
+        "body": "For questions about these Terms, contact us at legal@iziship.com or write to: iziship — Legal Team, Damascus, Syria."
+      }
+    }
+  },
+  "cookiePolicy": {
+    "meta": {
+      "title": "Cookie Policy",
+      "description": "Learn how iziship uses cookies and similar technologies on our platform."
+    },
+    "kicker": "Legal",
+    "h1": "Cookie Policy",
+    "updated": "Last updated: June 24, 2026",
+    "intro": "This Cookie Policy explains how iziship uses cookies and similar tracking technologies when you visit our website or use our platform. By using iziship, you consent to the use of cookies as described in this policy.",
+    "back": "Back to home",
+    "sections": {
+      "whatAreCookies": {
+        "title": "1. What Are Cookies?",
+        "body": "Cookies are small text files placed on your device by a website when you visit it. They allow the website to remember your actions and preferences (such as login status, language, and display settings) over a period of time, so you don't have to re-enter them every time you visit."
+      },
+      "howWeUse": {
+        "title": "2. How We Use Cookies",
+        "body": "We use cookies to keep you logged in securely, remember your language and display preferences, understand how you use our platform so we can improve it, measure the effectiveness of our marketing campaigns, and prevent fraud and protect the security of your account."
+      },
+      "types": {
+        "title": "3. Types of Cookies We Use",
+        "body": "Essential cookies are required for the platform to function and cannot be disabled — they include session cookies that keep you authenticated. Preference cookies store your language and UI settings. Analytics cookies (such as those from anonymized tools) help us understand usage patterns. Marketing cookies may be used to show relevant information about iziship on external channels."
+      },
+      "thirdParty": {
+        "title": "4. Third-Party Cookies",
+        "body": "Some pages may include cookies set by third-party services we use, such as analytics providers or embedded content. These third-party cookies are governed by each provider's privacy policy. We do not control these cookies and recommend reviewing those policies separately."
+      },
+      "managing": {
+        "title": "5. Managing Cookies",
+        "body": "You can control and delete cookies through your browser settings. Most browsers allow you to block or delete cookies entirely. However, blocking essential cookies will prevent the platform from functioning correctly. To opt out of analytics cookies, you can adjust your browser settings or use browser-based opt-out tools provided by the analytics service."
+      },
+      "changes": {
+        "title": "6. Changes to This Policy",
+        "body": "We may update this Cookie Policy from time to time. When we do, we will revise the date at the top of this page. We encourage you to review this policy periodically to stay informed about how we use cookies."
+      },
+      "contact": {
+        "title": "7. Contact Us",
+        "body": "If you have questions about our use of cookies, please contact us at privacy@iziship.com."
+      }
+    }
+  },
   "smartRouting": {
     "badge": "Smart Routing",
     "h2": "One engine. The best carrier, every time.",

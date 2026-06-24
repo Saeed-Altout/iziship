@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export function MarketingFooter() {
   const t = useTranslations("footer");
@@ -17,7 +18,7 @@ export function MarketingFooter() {
         <div className="flex flex-col gap-8 py-12 sm:flex-row sm:items-start sm:justify-between sm:py-14">
 
           {/* Brand */}
-          <div className="flex flex-col gap-3 sm:max-w-xs">
+          <div className="flex flex-col items-start gap-3 sm:max-w-xs">
             <div dir="ltr">
               <Image src="/logo-dark.svg" alt="iziship" width={110} height={30} className="h-8 w-auto" />
             </div>
@@ -52,16 +53,29 @@ export function MarketingFooter() {
                   {t(`links.${group}.title`)}
                 </p>
                 <ul className="flex flex-col gap-2">
-                  {[0, 1, 2].map((i) => (
-                    <li key={i}>
-                      <a
-                        href="#"
-                        className="text-[13px] text-white/45 transition-colors hover:text-white/80"
-                      >
-                        {t(`links.${group}.items.${i}`)}
-                      </a>
-                    </li>
-                  ))}
+                  {[0, 1, 2].map((i) => {
+                    const legalHrefs = ["/privacy", "/terms", "/cookie-policy"] as const;
+                    const isLegal = group === "legal";
+                    return (
+                      <li key={i}>
+                        {isLegal ? (
+                          <Link
+                            href={legalHrefs[i]}
+                            className="text-[13px] text-white/45 transition-colors hover:text-white/80"
+                          >
+                            {t(`links.${group}.items.${i}`)}
+                          </Link>
+                        ) : (
+                          <a
+                            href="#"
+                            className="text-[13px] text-white/45 transition-colors hover:text-white/80"
+                          >
+                            {t(`links.${group}.items.${i}`)}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             ))}
