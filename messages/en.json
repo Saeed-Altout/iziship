@@ -74,6 +74,46 @@
     "secondary": "Talk to us",
     "trust": "No credit card required · Cancel anytime"
   },
+  "faq": {
+    "kicker": "FAQ",
+    "h2": "Questions we get a lot",
+    "sub": "Everything you need to know before you start shipping with iziship.",
+    "stillQuestions": "Still have questions? Talk to us",
+    "items": [
+      {
+        "q": "What is iziship and how does it work?",
+        "a": "iziship is Syria's first multi-carrier logistics platform. You connect your store or create shipments manually, compare carrier rates and ETAs in real time, print a label in one click, and track every stage — from pickup to delivery and COD settlement — from a single dashboard."
+      },
+      {
+        "q": "Which shipping carriers does iziship support?",
+        "a": "We currently work with 10+ carriers operating across Syria and the wider MENA region, including Aramex, Bosta, SMSA, Naqel, and Fardar. We're adding new carriers every month — you'll always see the full list on your dashboard."
+      },
+      {
+        "q": "How does COD (Cash on Delivery) collection work?",
+        "a": "When a driver collects cash from the customer, the amount is tracked automatically. Once the carrier settles with iziship, the net amount (after our small service fee) is deposited directly into your iziship wallet. You can withdraw to your bank account at any time."
+      },
+      {
+        "q": "Can I connect my online store?",
+        "a": "Yes. iziship integrates natively with Salla, Zid, WooCommerce, and Shopify. Orders sync automatically — no manual copy-pasting. Shipment status is pushed back to your store so your customers always see live tracking."
+      },
+      {
+        "q": "Is there a setup fee or long-term contract?",
+        "a": "No setup fee, no contract. You pay only for the shipments you create. Plans are flexible — start free, upgrade as you grow, cancel anytime without penalty."
+      },
+      {
+        "q": "How do I track a shipment?",
+        "a": "Every shipment gets a unique public tracking link you can share with your customer. You and your customer both see real-time status through all five stages: Created → Picked up → In transit → Out for delivery → Delivered."
+      },
+      {
+        "q": "What happens if a shipment is lost or damaged?",
+        "a": "We work with you to file a claim directly with the carrier responsible. iziship keeps a full audit trail of every status change and handoff, which speeds up the resolution process significantly compared to dealing with carriers alone."
+      },
+      {
+        "q": "I'm a shipping carrier — can I join iziship?",
+        "a": "Absolutely. Carriers can onboard through our dedicated carrier portal, configure their zones, rates, and branch coverage, and start receiving orders from merchants on the platform immediately. Contact us to get set up."
+      }
+    ]
+  },
   "contact": {
     "kicker": "GET STARTED",
     "h2": "Start shipping with iziship today",

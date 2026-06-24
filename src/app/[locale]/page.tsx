@@ -6,6 +6,7 @@ import { AudienceDualCTASection } from "@/components/marketing/audience-dual-cta
 import { PlatformFeaturesSection } from "@/components/marketing/platform-features";
 import { StatsBarSection } from "@/components/marketing/stats-bar";
 import { CTASection } from "@/components/marketing/cta-section";
+import { FAQSection } from "@/components/marketing/faq-section";
 import { ContactSection } from "@/components/marketing/contact-section";
 import { MarketingFooter } from "@/components/marketing/footer";
 
@@ -21,6 +22,7 @@ export default function MarketingPage() {
         <PlatformFeaturesSection />
         <StatsBarSection />
         <CTASection />
+        <FAQSection />
         <ContactSection />
       </main>
       <MarketingFooter />
