@@ -199,6 +199,7 @@
   "audience": {
     "kicker": "Who iziship is built for",
     "h2": "Every side finds exactly what it needs",
+    "sub": "Whether you're moving packages or managing a carrier fleet, iziship gives you the tools to do it faster.",
     "merchants": {
       "kicker": "For merchants",
       "h3": "You sell. Stop managing five carriers.",
@@ -243,6 +244,53 @@
   "footer": {
     "tagline": "Syria's first multi-carrier logistics platform — built for merchants who ship COD.",
     "copyright": "© 2026 iziship. All rights reserved."
+  },
+  "platformFeatures": {
+    "kicker": "PLATFORM FEATURES",
+    "h2": "Every tool your logistics operation needs",
+    "sub": "From real-time carrier comparison to COD settlement and fleet routing — all in one platform.",
+    "cards": [
+      {
+        "title": "Smart Comparison Engine",
+        "bullets": [
+          "View and compare real-time rates from multiple carriers on a single screen.",
+          "Auto-filter carriers by parcel weight and delivery zone to prevent pricing errors.",
+          "Pick the best price, fastest ETA, or highest service rating — instantly."
+        ]
+      },
+      {
+        "title": "Plug & Play Integration",
+        "bullets": [
+          "Sync orders automatically from Salla, Zid, WooCommerce, or custom Shopify stores.",
+          "Eliminate manual copy-pasting of customer data to accelerate daily fulfillment.",
+          "Push automated tracking updates directly back to your store without lifting a finger."
+        ]
+      },
+      {
+        "title": "Real-Time Public Tracking",
+        "bullets": [
+          "Give customers and merchants a transparent live delivery timeline.",
+          "Highlight the active delivery node with real-time field status updates.",
+          "Reduce support inquiries significantly by offering precise delivery estimates."
+        ]
+      },
+      {
+        "title": "COD & Wallet Security",
+        "bullets": [
+          "Track every COD payment automatically from delivery to your digital wallet.",
+          "Enjoy automated financial clearing based on your subscription plan.",
+          "Review comprehensive invoices and balance sheets anytime on your dashboard."
+        ]
+      },
+      {
+        "title": "Fleet & Hub Management",
+        "bullets": [
+          "Assign dynamic shipping rates instantly using a smart weight-based matrix.",
+          "Map specific delivery zones to dedicated local branches — zero overlap.",
+          "Update hundreds of shipments simultaneously with one-click bulk actions."
+        ]
+      }
+    ]
   },
   "smartRouting": {
     "badge": "Smart Routing",

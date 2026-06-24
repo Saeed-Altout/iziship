@@ -93,6 +93,11 @@ export function AudienceDualCTASection() {
             {t("h2")}
           </h2>
         </Animate>
+        <Animate variant="blurUp" delay={0.18}>
+          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-[1.65] text-muted-foreground">
+            {t("sub")}
+          </p>
+        </Animate>
       </div>
 
       {/* Cards */}
