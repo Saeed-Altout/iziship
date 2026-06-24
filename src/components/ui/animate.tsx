@@ -17,6 +17,15 @@ const variantMap: Record<string, Variants> = {
       transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
     },
   },
+  blurUp: {
+    hidden: { opacity: 0, y: 20, filter: "blur(14px)" },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: "blur(0px)",
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    },
+  },
   scaleUp: {
     hidden: { opacity: 0, scale: 0.92 },
     visible: {
