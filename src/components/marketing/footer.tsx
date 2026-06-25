@@ -20,7 +20,7 @@ export function MarketingFooter() {
           {/* Brand */}
           <div className="flex flex-col items-start gap-3 sm:max-w-xs">
             <div dir="ltr">
-              <Image src="/logo-dark.svg" alt="iziship" width={110} height={30} className="h-8 w-auto" />
+              <Image src="/logo-dark.svg" alt="iziship" width={0} height={0} className="h-8 w-auto" style={{ width: "auto" }} />
             </div>
             <p className="text-[13px] leading-relaxed text-white/45">
               {t("tagline")}

@@ -47,7 +47,7 @@ export function FAQSection() {
       {/* ── Accordion ── */}
       <Animate variant="blurUp" delay={0.18}>
         <div className="mx-auto max-w-3xl">
-          <Accordion type="single" collapsible defaultValue="0" className="w-full">
+          <Accordion type="single" collapsible defaultValue="0" className="w-full" suppressHydrationWarning>
             {Array.from({ length: FAQ_COUNT }, (_, i) => (
               <AccordionItem key={i} value={String(i)} className="border-border">
                 <AccordionTrigger className="py-5 text-[15px] font-semibold text-foreground hover:no-underline hover:text-primary">

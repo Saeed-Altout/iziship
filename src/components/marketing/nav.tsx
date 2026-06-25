@@ -54,10 +54,11 @@ export function MarketingNav() {
           <Image
             src="/logo.svg"
             alt="iziship"
-            width={130}
-            height={36}
+            width={0}
+            height={0}
             priority
             className="h-9 w-auto"
+            style={{ width: "auto" }}
           />
         </a>
 
@@ -121,9 +122,10 @@ export function MarketingNav() {
                     <Image
                       src="/logo.svg"
                       alt="iziship"
-                      width={110}
-                      height={32}
+                      width={0}
+                      height={0}
                       className="h-8 w-auto"
+                      style={{ width: "auto" }}
                     />
                   </a>
                 </SheetTitle>

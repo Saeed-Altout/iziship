@@ -134,34 +134,6 @@ export function HeroSection() {
             </div>
           </Animate>
 
-          {/* Social proof */}
-          <Animate variant="fadeIn" delay={0.3}>
-            <div className="mt-7 flex items-center gap-3">
-              <div className="flex -space-x-2">
-                {AVATAR_COLORS.map((bg, i) => (
-                  <div
-                    key={i}
-                    className="flex size-8 items-center justify-center rounded-full border-2 border-background text-[11px] font-bold text-white"
-                    style={{ backgroundColor: bg }}
-                  >
-                    {AVATAR_INITIALS[i]}
-                  </div>
-                ))}
-              </div>
-              <div className="text-start">
-                <div className="flex items-center gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <svg key={i} width="13" height="13" viewBox="0 0 13 13" fill="#FFB020">
-                      <path d="M6.5 1l1.545 3.13L11.5 4.635l-2.5 2.435.59 3.43L6.5 8.885l-3.09 1.615.59-3.43L1.5 4.635l3.455-.505z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-[11.5px] text-muted-foreground">
-                  <span className="font-bold text-foreground">4.9/5</span> · 500+ merchants
-                </p>
-              </div>
-            </div>
-          </Animate>
         </Animate>
       </Section>
 

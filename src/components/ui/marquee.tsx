@@ -48,7 +48,10 @@ export function Marquee({
           pauseOnHover && "hover:[animation-play-state:paused]",
         )}
         style={{
-          animation: `mq-scroll ${duration}s linear infinite`,
+          animationName: "mq-scroll",
+          animationDuration: `${duration}s`,
+          animationTimingFunction: "linear",
+          animationIterationCount: "infinite",
           animationDirection: direction === "right" ? "reverse" : "normal",
         }}
       >
