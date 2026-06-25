@@ -55,7 +55,14 @@ export function MarketingFooter() {
                 <ul className="flex flex-col gap-2">
                   {[0, 1, 2].map((i) => {
                     const legalHrefs = ["/privacy", "/terms", "/cookie-policy"] as const;
+                    const productHrefs = ["#platform-features", "#audience", "#faq"] as const;
+                    const companyHrefs = ["#contact", "#faq", "#contact"] as const;
                     const isLegal = group === "legal";
+                    const href = isLegal
+                      ? legalHrefs[i]
+                      : group === "product"
+                      ? productHrefs[i]
+                      : companyHrefs[i];
                     return (
                       <li key={i}>
                         {isLegal ? (
@@ -67,7 +74,7 @@ export function MarketingFooter() {
                           </Link>
                         ) : (
                           <a
-                            href="#"
+                            href={href}
                             className="text-[13px] text-white/45 transition-colors hover:text-white/80"
                           >
                             {t(`links.${group}.items.${i}`)}

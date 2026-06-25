@@ -33,11 +33,10 @@ export function MarketingNav() {
   const locale = useLocale() as ILocale;
 
   const links = [
-    { label: t("links.howItWorks"), href: "#how" },
-    { label: t("links.features"), href: "#features" },
-    { label: t("links.forMerchants"), href: "#audience" },
-    { label: t("links.forCarriers"), href: "#audience" },
-    { label: t("links.integrations"), href: "#int" },
+    { label: t("links.features"), href: "#platform-features" },
+    { label: t("links.whoItsFor"), href: "#audience" },
+    { label: t("links.faq"), href: "#faq" },
+    { label: t("links.contact"), href: "#contact" },
   ];
 
   return (

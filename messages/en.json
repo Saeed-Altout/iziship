@@ -6,11 +6,10 @@
   },
   "nav": {
     "links": {
-      "howItWorks": "How it works",
       "features": "Features",
-      "forMerchants": "For merchants",
-      "forCarriers": "For carriers",
-      "integrations": "Integrations"
+      "whoItsFor": "Who it's for",
+      "faq": "FAQ",
+      "contact": "Contact"
     },
     "cta": "Start Free",
     "langToggle": "ع"
@@ -151,11 +150,11 @@
     "links": {
       "product": {
         "title": "Product",
-        "items": ["Features", "Pricing", "Integrations"]
+        "items": ["Features", "Who it's for", "FAQ"]
       },
       "company": {
         "title": "Company",
-        "items": ["About", "Blog", "Careers"]
+        "items": ["Contact us", "FAQ", "Get started"]
       },
       "legal": {
         "title": "Legal",
