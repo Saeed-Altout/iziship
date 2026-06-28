@@ -4,8 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Section } from "@/components/ui/section";
-import { BadgePill } from "@/components/ui/badge-pill";
+import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 
 /* ─── Data ───────────────────────────────────────────────────────────────── */
 
@@ -190,35 +189,9 @@ export function SmartRoutingSection() {
 
           {/* heading */}
           <div className="mb-12 flex flex-col items-center px-4 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 16, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0 }}
-              className="mb-4"
-            >
-              <BadgePill intent="primary" dot>
-                {t("badge")}
-              </BadgePill>
-            </motion.div>
-            <motion.h2
-              initial={{ opacity: 0, y: 20, filter: "blur(14px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="mb-3 text-[clamp(26px,3.5vw,44px)] font-extrabold tracking-tight text-slate-900"
-            >
-              {t("h2")}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 16, filter: "blur(10px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="max-w-lg text-[15px] leading-relaxed text-slate-500"
-            >
-              {t("sub")}
-            </motion.p>
+            <SectionBadge className="mb-4">{t("badge")}</SectionBadge>
+            <SectionTitle className="mb-3">{t("h2")}</SectionTitle>
+            <SectionSubtitle>{t("sub")}</SectionSubtitle>
           </div>
 
           {/* diagram */}

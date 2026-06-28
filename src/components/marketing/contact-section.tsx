@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Section } from "@/components/ui/section";
-import { BadgePill } from "@/components/ui/badge-pill";
+import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 import { Animate } from "@/components/ui/animate";
 import { ContactForm } from "@/components/forms/contact-form";
 
@@ -36,21 +35,9 @@ export function ContactSection() {
 
         {/* ── Left — copy ── */}
         <div>
-          <Animate variant="blurUp" delay={0} className="mb-4">
-            <BadgePill intent="primary" dot>{t("kicker")}</BadgePill>
-          </Animate>
-
-          <Animate variant="blurUp" delay={0.08}>
-            <h2 className="mb-4 text-[clamp(26px,3.2vw,44px)] font-black leading-[1.08] tracking-[-0.025em] text-foreground">
-              {t("h2")}
-            </h2>
-          </Animate>
-
-          <Animate variant="blurUp" delay={0.14}>
-            <p className="mb-8 text-[15px] leading-[1.7] text-muted-foreground">
-              {t("sub")}
-            </p>
-          </Animate>
+          <SectionBadge className="mb-4">{t("kicker")}</SectionBadge>
+          <SectionTitle className="mb-4">{t("h2")}</SectionTitle>
+          <SectionSubtitle className="mx-0 mb-8 max-w-none">{t("sub")}</SectionSubtitle>
 
           <Animate variant="blurUp" delay={0.2}>
             <ul className="flex flex-col gap-3" role="list">

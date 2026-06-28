@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import Lenis from "lenis";
-import { Section } from "@/components/ui/section";
+import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 import { BadgePill } from "@/components/ui/badge-pill";
 import { Animate } from "@/components/ui/animate";
 
@@ -374,26 +374,15 @@ export function PlatformFeaturesSection() {
           className="relative z-10 flex h-full flex-col justify-center px-4 sm:px-6 lg:px-8"
         >
           {/* ── Header ── */}
-          <div className="mb-8 text-center md:mb-10">
-            <Animate variant="blurUp" delay={0} className="mb-4 flex justify-center">
-              <BadgePill
-                intent="primary"
-                dot
-                style={{ borderColor: `${accent.glow}30`, background: `${accent.glow}15`, color: accent.glow } as React.CSSProperties}
-              >
-                {t("kicker")}
-              </BadgePill>
-            </Animate>
-            <Animate variant="blurUp" delay={0.08}>
-              <h2 className="text-[clamp(22px,2.6vw,36px)] font-extrabold leading-[1.1] tracking-tight text-foreground">
-                {t("h2")}
-              </h2>
-            </Animate>
-            <Animate variant="blurUp" delay={0.16}>
-              <p className="mx-auto mt-3 max-w-xl text-[15px] leading-[1.65] text-muted-foreground">
-                {t("sub")}
-              </p>
-            </Animate>
+          <div className="mb-8 flex flex-col items-center text-center md:mb-10">
+            <SectionBadge
+              className="mb-4"
+              style={{ borderColor: `${accent.glow}30`, background: `${accent.glow}15`, color: accent.glow } as React.CSSProperties}
+            >
+              {t("kicker")}
+            </SectionBadge>
+            <SectionTitle className="mb-3 text-[clamp(22px,2.6vw,36px)]">{t("h2")}</SectionTitle>
+            <SectionSubtitle className="mt-0">{t("sub")}</SectionSubtitle>
           </div>
 
           {/* ── Two-column body ── */}

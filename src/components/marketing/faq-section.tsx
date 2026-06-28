@@ -1,8 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Section } from "@/components/ui/section";
-import { BadgePill } from "@/components/ui/badge-pill";
+import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 import { Animate } from "@/components/ui/animate";
 import {
   Accordion,
@@ -28,20 +27,10 @@ export function FAQSection() {
       />
 
       {/* ── Header — centered top ── */}
-      <div className="mb-12 text-center md:mb-14">
-        <Animate variant="blurUp" delay={0} className="mb-4 flex justify-center">
-          <BadgePill intent="primary" dot>{t("kicker")}</BadgePill>
-        </Animate>
-        <Animate variant="blurUp" delay={0.08}>
-          <h2 className="mb-3 text-[clamp(26px,3vw,42px)] font-black leading-[1.1] tracking-tight text-foreground">
-            {t("h2")}
-          </h2>
-        </Animate>
-        <Animate variant="blurUp" delay={0.14}>
-          <p className="mx-auto max-w-xl text-[15px] leading-[1.7] text-muted-foreground">
-            {t("sub")}
-          </p>
-        </Animate>
+      <div className="mb-12 flex flex-col items-center text-center md:mb-14">
+        <SectionBadge className="mb-4">{t("kicker")}</SectionBadge>
+        <SectionTitle className="mb-3">{t("h2")}</SectionTitle>
+        <SectionSubtitle>{t("sub")}</SectionSubtitle>
       </div>
 
       {/* ── Accordion ── */}

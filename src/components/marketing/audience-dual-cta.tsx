@@ -15,7 +15,7 @@ import {
   IconChartBar,
 } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
-import { Section } from "@/components/ui/section";
+import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 import { BadgePill } from "@/components/ui/badge-pill";
 
 const MERCHANT_BULLETS: { icon: React.ReactNode; key: number }[] = [
@@ -82,22 +82,10 @@ export function AudienceDualCTASection() {
     <Section id="audience" padding="large">
 
       {/* Header */}
-      <div className="mb-[clamp(40px,5vw,64px)] text-center">
-        <Animate variant="blurUp" delay={0} className="mb-4 flex justify-center">
-          <BadgePill intent="primary" dot>
-            {t("kicker")}
-          </BadgePill>
-        </Animate>
-        <Animate variant="blurUp" delay={0.1}>
-          <h2 className="text-[clamp(28px,3.5vw,44px)] font-black leading-[1.08] tracking-[-0.02em] text-foreground">
-            {t("h2")}
-          </h2>
-        </Animate>
-        <Animate variant="blurUp" delay={0.18}>
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-[1.65] text-muted-foreground">
-            {t("sub")}
-          </p>
-        </Animate>
+      <div className="mb-[clamp(40px,5vw,64px)] flex flex-col items-center text-center">
+        <SectionBadge className="mb-4">{t("kicker")}</SectionBadge>
+        <SectionTitle className="mb-3">{t("h2")}</SectionTitle>
+        <SectionSubtitle>{t("sub")}</SectionSubtitle>
       </div>
 
       {/* Cards */}
