@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 
@@ -27,6 +26,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { LangToggle } from "@/components/marketing/lang-toggle";
 import { Link } from "@/i18n/navigation";
+import { Logo } from "@/components/marketing/logo";
 
 export function MarketingNav() {
   const t = useTranslations("nav");
@@ -49,28 +49,9 @@ export function MarketingNav() {
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 md:px-0">
         {/* Logo */}
-        <Link href="/" className="me-4 shrink-0" dir="ltr">
-          <Image
-            src="/logo.svg"
-            alt="iziship"
-            width={0}
-            height={0}
-            priority
-            className="block h-8 w-auto dark:hidden sm:h-9"
-            style={{ width: "auto" }}
-          />
-          <Image
-            src="/logo-dark.svg"
-            alt="iziship"
-            width={0}
-            height={0}
-            priority
-            className="hidden h-8 w-auto dark:block sm:h-9"
-            style={{ width: "auto" }}
-          />
-        </Link>
+        <Logo />
 
         {/* Desktop nav */}
         <NavigationMenu viewport={false} className="hidden md:flex">
@@ -132,26 +113,9 @@ export function MarketingNav() {
               side={getSheetSide(locale)}
               className="flex flex-col p-0"
             >
-              <SheetHeader className="border-b border-border px-6 py-4">
+              <SheetHeader className="border-b border-border py-4">
                 <SheetTitle asChild>
-                  <Link href="/" dir="ltr">
-                    <Image
-                      src="/logo.svg"
-                      alt="iziship"
-                      width={0}
-                      height={0}
-                      className="block h-8 w-auto dark:hidden"
-                      style={{ width: "auto" }}
-                    />
-                    <Image
-                      src="/logo-dark.svg"
-                      alt="iziship"
-                      width={0}
-                      height={0}
-                      className="hidden h-8 w-auto dark:block"
-                      style={{ width: "auto" }}
-                    />
-                  </Link>
+                  <Logo />
                 </SheetTitle>
               </SheetHeader>
 
