@@ -1,5 +1,3 @@
-import type { User } from "@/types";
-
 export function formatPrice(amount: string | number): string {
   const num = typeof amount === "string" ? parseFloat(amount) : amount;
   return `$${num.toFixed(2)}`;
@@ -26,8 +24,4 @@ export function formatDateTime(iso: string): string {
     hour12: false,
   });
   return `${date} · ${time}`;
-}
-
-export function getFullName(u: Pick<User, "first_name" | "last_name">): string {
-  return `${u.first_name} ${u.last_name}`;
 }

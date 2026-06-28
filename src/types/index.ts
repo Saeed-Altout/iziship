@@ -1,11 +1,3 @@
-export type UserRole =
-  | "admin"
-  | "sales"
-  | "warehouse"
-  | "accountant"
-  | "technician"
-  | "delivery";
-
 export interface ApiResponse<T> {
   success: boolean;
   statusCode: number;
@@ -24,15 +16,4 @@ export interface PaginationMeta {
 export interface PaginatedResponse<T> {
   data: T[];
   meta: PaginationMeta;
-}
-
-export interface User {
-  id: string;
-  email: string;
-  first_name: string;
-  last_name: string;
-  phone: string | null;
-  role: UserRole;
-  locale: string;
-  is_active: boolean;
 }
