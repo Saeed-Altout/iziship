@@ -1,45 +1,20 @@
 "use client";
 
-import React from "react";
 import { useTranslations } from "next-intl";
+import { IconArrowRight, IconCheck } from "@tabler/icons-react";
+
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { BadgePill } from "@/components/ui/badge-pill";
 import { Animate } from "@/components/ui/animate";
-import { Marquee } from "@/components/ui/marquee";
-import Image from "next/image";
-import { IconArrowRight, IconCheck } from "@tabler/icons-react";
-
-const CARRIERS = [
-  { name: "FedEx", src: "/logos/logistics-delivery/fedex-logo.svg" },
-  { name: "J&T Express", src: "/logos/logistics-delivery/j_t-express-logo.svg" },
-  { name: "JNE Express", src: "/logos/logistics-delivery/jne-express-logo.svg" },
-  { name: "GoSend", src: "/logos/logistics-delivery/gosend-logo.svg" },
-  { name: "GoBox", src: "/logos/logistics-delivery/gobox-logo.svg" },
-  { name: "Paxel", src: "/logos/logistics-delivery/paxel-logo.svg" },
-  { name: "ID Express", src: "/logos/logistics-delivery/id-express-logo.svg" },
-  { name: "Pos Indonesia", src: "/logos/logistics-delivery/pos-indonesia-logo.svg" },
-];
-
-const TRUST_ITEMS = ["No setup fee", "Cancel anytime", "24/7 support"];
-const AVATAR_COLORS = ["#1B6EF3", "#00A651", "#FF6B2C", "#E60000"] as const;
-const AVATAR_INITIALS = ["S", "A", "M", "R"];
+import { CarriersMarquee } from "@/components/marketing/carriers-marquee";
 
 export function HeroSection() {
   const t = useTranslations("hero");
+  const trustItems = t.raw("trust") as string[];
 
   return (
     <section className="relative overflow-hidden pb-0 pt-14">
-      {/* subtle radial glow behind headline */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-130 opacity-40"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 0%, oklch(0.541 0.233 258 / 14%), transparent)",
-        }}
-      />
-
       <Section width="container" padding="none">
         <Animate
           variant="staggerContainer"
@@ -124,7 +99,7 @@ export function HeroSection() {
               </Button>
 
               <div className="flex flex-wrap justify-center gap-x-5 gap-y-1.5 text-[12.5px] font-medium text-muted-foreground">
-                {TRUST_ITEMS.map((item) => (
+                {trustItems.map((item: string) => (
                   <span key={item} className="flex items-center gap-1.5">
                     <IconCheck size={13} className="shrink-0 text-success" />
                     {item}
@@ -133,31 +108,10 @@ export function HeroSection() {
               </div>
             </div>
           </Animate>
-
         </Animate>
       </Section>
 
-      {/* Carrier marquee strip */}
-      <Animate variant="fadeIn" delay={0.4} once>
-        <div className="border-t border-border bg-background/80 pb-6 pt-5">
-          <p className="mb-4 text-center text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
-            Providing solutions for best carriers
-          </p>
-          <Marquee speed={45} fade pauseOnHover className="[--mq-gap:3.5rem]">
-            {CARRIERS.map((c, i) => (
-              <div key={i} className="flex shrink-0 items-center">
-                <Image
-                  src={c.src}
-                  alt={c.name}
-                  width={120}
-                  height={40}
-                  className="h-8 w-auto object-contain grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
-                />
-              </div>
-            ))}
-          </Marquee>
-        </div>
-      </Animate>
+      <CarriersMarquee />
     </section>
   );
 }

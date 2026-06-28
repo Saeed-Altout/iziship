@@ -78,21 +78,13 @@
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
  
   @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - var(--gap)));
-    }
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
   }
- 
+
   @keyframes marquee-vertical {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(calc(-100% - var(--gap)));
-    }
+    from { transform: translateY(0); }
+    to   { transform: translateY(-100%); }
   }
 }
 
@@ -280,11 +272,3 @@
 .animate-iz-fade-up  { animation: iz-fade-up 0.7s ease both; }
 .animate-iz-float    { animation: iz-float 5s ease-in-out infinite; }
 .animate-iz-float-slow { animation: iz-float 4s ease-in-out infinite 0.5s; }
-
-@keyframes iz-marquee-x {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-33.333%); }
-}
-.animate-iz-marquee-x {
-  animation: iz-marquee-x 28s linear infinite;
-}

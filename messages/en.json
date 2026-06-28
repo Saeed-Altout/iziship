@@ -21,6 +21,8 @@
     "cta1": "Start Free",
     "cta2": "See how it works",
     "note": "No setup fee · Cancel anytime",
+    "trust": ["No setup fee", "Cancel anytime", "24/7 support"],
+    "carriersLabel": "Providing solutions for best carriers",
     "card": {
       "label": "LIVE SHIPMENT",
       "status": "In delivery · Damascus"

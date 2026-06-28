@@ -1,71 +1,100 @@
 "use client";
 
-import * as React from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import { cn } from "@/lib/utils";
 
-export interface MarqueeProps extends React.HTMLAttributes<HTMLDivElement> {
-  direction?: "left" | "right";
-  /** pixels per second */
-  speed?: number;
+interface MarqueeProps extends ComponentPropsWithoutRef<"div"> {
+  className?: string;
+  reverse?: boolean;
   pauseOnHover?: boolean;
-  fade?: boolean;
+  children: React.ReactNode;
+  vertical?: boolean;
+  repeat?: number;
+  autoFill?: boolean;
+  ariaLabel?: string;
+  ariaLive?: "off" | "polite" | "assertive";
+  ariaRole?: string;
 }
 
 export function Marquee({
-  direction = "left",
-  speed = 40,
-  pauseOnHover = true,
-  fade = true,
   className,
+  reverse = false,
+  pauseOnHover = false,
   children,
+  vertical = false,
+  repeat = 2,
+  ariaLabel,
+  ariaLive = "off",
+  ariaRole = "marquee",
   ...props
 }: MarqueeProps) {
-  const trackRef = React.useRef<HTMLDivElement>(null);
-  const [duration, setDuration] = React.useState(20);
-
-  React.useEffect(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    const totalWidth = el.scrollWidth / 2; // two copies
-    setDuration(totalWidth / speed);
-  }, [speed]);
-
   return (
     <div
-      className={cn("relative overflow-hidden", className)}
       {...props}
-    >
-      {fade && (
-        <>
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent" />
-        </>
+      data-slot="marquee"
+      aria-label={ariaLabel}
+      aria-live={ariaLive}
+      role={ariaRole}
+      className={cn(
+        "group flex overflow-hidden [--duration:40s] [--gap:2rem]",
+        vertical ? "flex-col" : "flex-row",
+        className,
       )}
+    >
+      {/* The track holds all copies and scrolls as one unit */}
       <div
-        ref={trackRef}
         className={cn(
-          "flex w-max gap-[var(--mq-gap,2.5rem)]",
-          pauseOnHover && "hover:[animation-play-state:paused]",
+          "flex shrink-0 min-w-full",
+          vertical ? "flex-col" : "flex-row",
+          vertical ? "[gap:var(--gap)]" : "[gap:var(--gap)]",
+          !vertical && "animate-marquee",
+          vertical && "animate-marquee-vertical",
+          reverse && "[animation-direction:reverse]",
+          pauseOnHover && "group-hover:[animation-play-state:paused]",
         )}
-        style={{
-          animationName: "mq-scroll",
-          animationDuration: `${duration}s`,
-          animationTimingFunction: "linear",
-          animationIterationCount: "infinite",
-          animationDirection: direction === "right" ? "reverse" : "normal",
-        }}
       >
-        {children}
-        {/* duplicate for seamless loop */}
-        {children}
+        {Array.from({ length: Math.max(repeat, 2) }, (_, i) => (
+          <div
+            key={i}
+            className={cn(
+              "flex shrink-0",
+              vertical
+                ? "flex-col [gap:var(--gap)]"
+                : "flex-row [gap:var(--gap)]",
+            )}
+          >
+            {children}
+          </div>
+        ))}
       </div>
 
-      <style>{`
-        @keyframes mq-scroll {
-          from { transform: translateX(0); }
-          to   { transform: translateX(-50%); }
-        }
-      `}</style>
+      {/* Duplicate track for seamless loop */}
+      <div
+        aria-hidden
+        className={cn(
+          "flex shrink-0 min-w-full",
+          vertical ? "flex-col" : "flex-row",
+          vertical ? "[gap:var(--gap)]" : "[gap:var(--gap)]",
+          !vertical && "animate-marquee",
+          vertical && "animate-marquee-vertical",
+          reverse && "[animation-direction:reverse]",
+          pauseOnHover && "group-hover:[animation-play-state:paused]",
+        )}
+      >
+        {Array.from({ length: Math.max(repeat, 2) }, (_, i) => (
+          <div
+            key={i}
+            className={cn(
+              "flex shrink-0",
+              vertical
+                ? "flex-col [gap:var(--gap)]"
+                : "flex-row [gap:var(--gap)]",
+            )}
+          >
+            {children}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
