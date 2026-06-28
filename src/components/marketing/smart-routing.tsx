@@ -1,62 +1,34 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
-import { Section, SectionBadge, SectionTitle, SectionSubtitle } from "@/components/ui/section";
 
-/* ─── Data ───────────────────────────────────────────────────────────────── */
+import {
+  SMART_ROUTING_INPUTS,
+  SMART_ROUTING_OUTPUTS,
+  SMART_ROUTING_ROTATES,
+} from "@/constants";
+import { bezierPath, cardCenterY } from "@/lib/utils/smart-routing";
 
-const INPUTS = [
-  { key: "woo",     label: "WooCommerce", logo: "/logos/marketplace/woocommerce-logo.svg" },
-  { key: "shopify", label: "Shopify",     logo: "/logos/marketplace/shopify-logo.svg" },
-  { key: "shopee",  label: "Shopee",      logo: "/logos/marketplace/shopee-logo.svg" },
-  { key: "lazada",  label: "Lazada",      logo: "/logos/marketplace/lazada-logo.svg" },
-  { key: "ebay",    label: "eBay",        logo: "/logos/marketplace/ebay-logo.svg" },
-];
+import {
+  Section,
+  SectionBadge,
+  SectionTitle,
+  SectionSubtitle,
+} from "@/components/ui/section";
 
-const OUTPUTS = [
-  { key: "fedex",  label: "FedEx",        logo: "/logos/logistics-delivery/fedex-logo.svg" },
-  { key: "jnt",    label: "J&T Express",  logo: "/logos/logistics-delivery/j_t-express-logo.svg" },
-  { key: "jne",    label: "JNE Express",  logo: "/logos/logistics-delivery/jne-express-logo.svg" },
-  { key: "gosend", label: "GoSend",       logo: "/logos/logistics-delivery/gosend-logo.svg" },
-  { key: "paxel",  label: "Paxel",        logo: "/logos/logistics-delivery/paxel-logo.svg" },
-  { key: "pos",    label: "Pos Indonesia", logo: "/logos/logistics-delivery/pos-indonesia-logo.svg" },
-];
-
-/* ─── SVG layout constants ───────────────────────────────────────────────── */
-
-const VW = 960;
-const VH = 500;
-const CX = VW / 2;   // 480
-const CY = VH / 2;   // 250
-
-// Card dimensions — must match NodeCard styles exactly
-const CARD_H        = 72;  // h-18 = 72px
-const CARD_GAP_LEFT = 16;  // gap-4
-const CARD_GAP_RIGHT= 12;  // gap-3
-
-// Column container width = w-28 = 112px; card width = w-22 = 88px centered inside
-const LEFT_EDGE  = 112;
-const RIGHT_EDGE = VW - 112;
-
-// Globe radius used for line endpoint offset
-const GLOBE_R = 96; // half of size-48 (192px / 2)
-
-// Compute card center Y for each column so lines land exactly in the middle
-function cardCenterY(count: number, index: number, gap: number): number {
-  const totalHeight = count * CARD_H + (count - 1) * gap;
-  const startY = CY - totalHeight / 2;
-  return startY + index * (CARD_H + gap) + CARD_H / 2;
-}
-
-function bezierPath(fromX: number, fromY: number, toX: number, toY: number) {
-  const mx = (fromX + toX) / 2;
-  return `M ${fromX} ${fromY} C ${mx} ${fromY}, ${mx} ${toY}, ${toX} ${toY}`;
-}
-
-/* ─── AnimatedPath ───────────────────────────────────────────────────────── */
+const COOKIE_VW = 960;
+const COOKIE_VH = 500;
+const COOKIE_CX = COOKIE_VW / 2; // 480
+const COOKIE_CY = COOKIE_VH / 2; // 250
+const COOKIE_CARD_H = 72; // h-18 = 72px
+const COOKIE_CARD_GAP_LEFT = 16; // gap-4
+const COOKIE_CARD_GAP_RIGHT = 12; // gap-3
+const COOKIE_LEFT_EDGE = 112; // column container width = w-28 = 112px
+const COOKIE_RIGHT_EDGE = COOKIE_VW - 112;
+const COOKIE_GLOBE_R = 96; // half of size-48 (192px / 2)
 
 function AnimatedPath({
   d,
@@ -98,10 +70,6 @@ function AnimatedPath({
   );
 }
 
-/* ─── NodeCard ───────────────────────────────────────────────────────────── */
-
-const ROTATES = ["rotate-2", "-rotate-2", "rotate-1", "-rotate-3", "rotate-3"];
-
 function NodeCard({
   label,
   logo,
@@ -131,7 +99,6 @@ function NodeCard({
             }
       }
       transition={{ duration: 0.3, ease: "easeOut" }}
-      // h-[72px] w-[88px] — keep in sync with CARD_H / column width constants
       className={`flex h-18 w-22 items-center justify-center rounded-2xl border p-3 backdrop-blur-sm ${rotateClass}`}
     >
       <div className="relative h-10 w-full">
@@ -141,27 +108,36 @@ function NodeCard({
   );
 }
 
-/* ─── Main component ─────────────────────────────────────────────────────── */
-
 export function SmartRoutingSection() {
   const t = useTranslations("smartRouting");
 
-  const [phase, setPhase] = useState<"idle" | "input" | "processing" | "output">("idle");
+  const [phase, setPhase] = useState<
+    "idle" | "input" | "processing" | "output"
+  >("idle");
   const [bestChoice, setBestChoice] = useState(0);
   const cleanupRef = useRef<(() => void) | null>(null);
 
+  const [diagramScale, setDiagramScale] = useState(1);
+  const updateScale = useCallback(() => {
+    setDiagramScale(Math.min(1, window.innerWidth / COOKIE_VW));
+  }, []);
+  useEffect(() => {
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, [updateScale]);
+
   useEffect(() => {
     function runCycle() {
-      // clear any lingering timeouts from a previous cycle
       cleanupRef.current?.();
 
-      const choice = Math.floor(Math.random() * OUTPUTS.length);
+      const choice = Math.floor(Math.random() * SMART_ROUTING_OUTPUTS.length);
       setBestChoice(choice);
       setPhase("input");
 
       const t1 = setTimeout(() => setPhase("processing"), 900);
-      const t2 = setTimeout(() => setPhase("output"),     1500);
-      const t3 = setTimeout(() => setPhase("idle"),       3200);
+      const t2 = setTimeout(() => setPhase("output"), 1500);
+      const t3 = setTimeout(() => setPhase("idle"), 3200);
 
       cleanupRef.current = () => {
         clearTimeout(t1);
@@ -178,15 +154,14 @@ export function SmartRoutingSection() {
     };
   }, []);
 
-  const showLeft   = phase === "input" || phase === "processing";
-  const showRight  = phase === "output";
+  const showLeft = phase === "input" || phase === "processing";
+  const showRight = phase === "output";
   const processing = phase === "processing" || phase === "output";
 
   return (
     <section className="relative overflow-hidden py-20">
       <div className="relative z-10">
         <Section width="container" padding="none">
-
           {/* heading */}
           <div className="mb-12 flex flex-col items-center px-4 text-center">
             <SectionBadge className="mb-4">{t("badge")}</SectionBadge>
@@ -194,58 +169,115 @@ export function SmartRoutingSection() {
             <SectionSubtitle>{t("sub")}</SectionSubtitle>
           </div>
 
-          {/* diagram */}
+          {/* diagram — scales down on mobile, full size on md+ */}
           <div
-            className="flex justify-center overflow-x-auto pb-4"
-            style={{ WebkitOverflowScrolling: "touch" } as React.CSSProperties}
+            className="flex justify-center overflow-hidden"
+            style={{ height: COOKIE_VH * diagramScale }}
           >
-            <div className="relative" style={{ width: VW, height: VH, minWidth: VW }}>
-
+            <div
+              style={{
+                width: COOKIE_VW,
+                transformOrigin: "top center",
+                transform: `scale(${diagramScale})`,
+              }}
+            >
+            <div
+              className="relative"
+              style={{
+                width: COOKIE_VW,
+                height: COOKIE_VH,
+              }}
+            >
               {/* ── SVG lines ───────────────────────────────────────────── */}
               <svg
-                viewBox={`0 0 ${VW} ${VH}`}
-                width={VW}
-                height={VH}
+                viewBox={`0 0 ${COOKIE_VW} ${COOKIE_VH}`}
+                width={COOKIE_VW}
+                height={COOKIE_VH}
                 className="pointer-events-none absolute inset-0"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <defs>
-                  <linearGradient id="sr-grad-in" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient
+                    id="sr-grad-in"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
                     <stop offset="0%" stopColor="#cbd5e1" />
                     <stop offset="100%" stopColor="#3b82f6" />
                   </linearGradient>
-                  <linearGradient id="sr-grad-out" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <linearGradient
+                    id="sr-grad-out"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
                     <stop offset="0%" stopColor="#10b981" />
                     <stop offset="100%" stopColor="#cbd5e1" />
                   </linearGradient>
                 </defs>
 
                 {/* ghost lines — inputs */}
-                <g opacity="0.2" stroke="#cbd5e1" strokeWidth="1.5">
-                  {INPUTS.map((_, i) => (
+                <g opacity="0.55" stroke="#94a3b8" strokeWidth="1.5">
+                  {SMART_ROUTING_INPUTS.map((_, i) => (
                     <path
                       key={i}
-                      d={bezierPath(LEFT_EDGE, cardCenterY(INPUTS.length, i, CARD_GAP_LEFT), CX - GLOBE_R, CY)}
+                      d={bezierPath(
+                        COOKIE_LEFT_EDGE,
+                        cardCenterY(
+                          SMART_ROUTING_INPUTS.length,
+                          i,
+                          COOKIE_CARD_GAP_LEFT,
+                          COOKIE_CARD_H,
+                          COOKIE_CY,
+                        ),
+                        COOKIE_CX - COOKIE_GLOBE_R,
+                        COOKIE_CY,
+                      )}
                     />
                   ))}
                 </g>
 
                 {/* ghost lines — outputs */}
-                <g opacity="0.2" stroke="#cbd5e1" strokeWidth="1.5">
-                  {OUTPUTS.map((_, i) => (
+                <g opacity="0.55" stroke="#94a3b8" strokeWidth="1.5">
+                  {SMART_ROUTING_OUTPUTS.map((_, i) => (
                     <path
                       key={i}
-                      d={bezierPath(CX + GLOBE_R, CY, RIGHT_EDGE, cardCenterY(OUTPUTS.length, i, CARD_GAP_RIGHT))}
+                      d={bezierPath(
+                        COOKIE_CX + COOKIE_GLOBE_R,
+                        COOKIE_CY,
+                        COOKIE_RIGHT_EDGE,
+                        cardCenterY(
+                          SMART_ROUTING_OUTPUTS.length,
+                          i,
+                          COOKIE_CARD_GAP_RIGHT,
+                          COOKIE_CARD_H,
+                          COOKIE_CY,
+                        ),
+                      )}
                     />
                   ))}
                 </g>
 
                 {/* animated input streams */}
-                {INPUTS.map((_, i) => (
+                {SMART_ROUTING_INPUTS.map((_, i) => (
                   <AnimatedPath
                     key={`in-${i}`}
-                    d={bezierPath(LEFT_EDGE, cardCenterY(INPUTS.length, i, CARD_GAP_LEFT), CX - GLOBE_R, CY)}
+                    d={bezierPath(
+                      COOKIE_LEFT_EDGE,
+                      cardCenterY(
+                        SMART_ROUTING_INPUTS.length,
+                        i,
+                        COOKIE_CARD_GAP_LEFT,
+                        COOKIE_CARD_H,
+                        COOKIE_CY,
+                      ),
+                      COOKIE_CX - COOKIE_GLOBE_R,
+                      COOKIE_CY,
+                    )}
                     active={showLeft}
                     gradient="sr-grad-in"
                     delay={i * 0.05}
@@ -255,7 +287,18 @@ export function SmartRoutingSection() {
                 {/* animated output stream — chosen carrier only */}
                 <AnimatedPath
                   key={`out-${bestChoice}`}
-                  d={bezierPath(CX + GLOBE_R, CY, RIGHT_EDGE, cardCenterY(OUTPUTS.length, bestChoice, CARD_GAP_RIGHT))}
+                  d={bezierPath(
+                    COOKIE_CX + COOKIE_GLOBE_R,
+                    COOKIE_CY,
+                    COOKIE_RIGHT_EDGE,
+                    cardCenterY(
+                      SMART_ROUTING_OUTPUTS.length,
+                      bestChoice,
+                      COOKIE_CARD_GAP_RIGHT,
+                      COOKIE_CARD_H,
+                      COOKIE_CY,
+                    ),
+                  )}
                   active={showRight}
                   gradient="sr-grad-out"
                   delay={0}
@@ -263,16 +306,16 @@ export function SmartRoutingSection() {
               </svg>
 
               {/* ── Left column ─────────────────────────────────────────── */}
-              <div
-                className="absolute left-0 top-0 flex h-full w-28 flex-col items-center justify-center gap-4"
-              >
-                {INPUTS.map((node, i) => (
+              <div className="absolute left-0 top-0 flex h-full w-28 flex-col items-center justify-center gap-4">
+                {SMART_ROUTING_INPUTS.map((node, i) => (
                   <NodeCard
                     key={node.key}
                     label={node.label}
                     logo={node.logo}
                     highlighted={false}
-                    rotateClass={ROTATES[i % ROTATES.length]}
+                    rotateClass={
+                      SMART_ROUTING_ROTATES[i % SMART_ROUTING_ROTATES.length]
+                    }
                   />
                 ))}
               </div>
@@ -281,8 +324,8 @@ export function SmartRoutingSection() {
               <div
                 className="absolute flex items-center justify-center"
                 style={{
-                  left: CX - 96,
-                  top:  CY - 96,
+                  left: COOKIE_CX - 96,
+                  top: COOKIE_CY - 96,
                   width: 192,
                   height: 192,
                 }}
@@ -293,53 +336,38 @@ export function SmartRoutingSection() {
                   style={{ animationDuration: "4s" }}
                 />
 
-                <motion.div
+                <motion.svg
+                  viewBox="0 0 100 100"
+                  width="160"
+                  height="160"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="iziship"
                   animate={
                     processing
-                      ? {
-                          borderColor: "#3b82f6",
-                          boxShadow:
-                            "0 0 0 4px rgba(59,130,246,0.1), 0 12px 40px rgba(59,130,246,0.15)",
-                        }
-                      : {
-                          borderColor: "#e2e8f0",
-                          boxShadow: "0 8px 32px rgba(59,130,246,0.06)",
-                        }
+                      ? { filter: "drop-shadow(0 0 12px rgba(59,130,246,0.4))" }
+                      : { filter: "drop-shadow(0 4px 12px rgba(59,130,246,0.15))" }
                   }
                   transition={{ duration: 0.4 }}
-                  className="relative flex size-48 flex-col items-center justify-center overflow-hidden rounded-full border-2 bg-white"
                 >
-                  {/* dot-grid texture */}
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 opacity-[0.035]"
-                    style={{
-                      backgroundImage: "radial-gradient(#000 1.5px,transparent 1.5px)",
-                      backgroundSize: "10px 10px",
-                    }}
-                  />
-                  {/* iziship icon mark — inline so it fills the circle properly */}
-                  <svg
-                    viewBox="0 0 100 100"
-                    width="80"
-                    height="80"
-                    xmlns="http://www.w3.org/2000/svg"
-                    aria-label="iziship"
+                  <rect width="100" height="100" rx="50" fill="#1B6EF3" />
+                  <g
+                    fill="none"
+                    stroke="#FFFFFF"
+                    strokeWidth="11"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    <rect width="100" height="100" rx="24" fill="#1B6EF3" />
-                    <g fill="none" stroke="#FFFFFF" strokeWidth="11" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M28 72 L56 44" />
-                      <path d="M42.5 44 H56 V57.5" />
-                    </g>
-                    <circle cx="70" cy="30" r="8.5" fill="#FF6B2C" />
-                  </svg>
-                </motion.div>
+                    <path d="M28 72 L56 44" />
+                    <path d="M42.5 44 H56 V57.5" />
+                  </g>
+                  <circle cx="70" cy="30" r="8.5" fill="#FF6B2C" />
+                </motion.svg>
 
                 {/* "Selecting Best Route" badge */}
                 <motion.div
                   animate={
                     processing
-                      ? { opacity: 1, x: 0,  borderColor: "#10b981" }
+                      ? { opacity: 1, x: 0, borderColor: "#10b981" }
                       : { opacity: 0, x: -8, borderColor: "#e2e8f0" }
                   }
                   transition={{ duration: 0.3 }}
@@ -355,23 +383,24 @@ export function SmartRoutingSection() {
               </div>
 
               {/* ── Right column ────────────────────────────────────────── */}
-              <div
-                className="absolute right-0 top-0 flex h-full w-28 flex-col items-center justify-center gap-3"
-              >
-                {OUTPUTS.map((node, i) => (
+              <div className="absolute right-0 top-0 flex h-full w-28 flex-col items-center justify-center gap-3">
+                {SMART_ROUTING_OUTPUTS.map((node, i) => (
                   <NodeCard
                     key={node.key}
                     label={node.label}
                     logo={node.logo}
                     highlighted={showRight && i === bestChoice}
-                    rotateClass={ROTATES[(i + 2) % ROTATES.length]}
+                    rotateClass={
+                      SMART_ROUTING_ROTATES[
+                        (i + 2) % SMART_ROUTING_ROTATES.length
+                      ]
+                    }
                   />
                 ))}
               </div>
-
+            </div>
             </div>
           </div>
-
         </Section>
       </div>
     </section>
