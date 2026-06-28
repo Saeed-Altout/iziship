@@ -148,13 +148,9 @@
     "copyright": "© 2026 iziship. All rights reserved.",
     "status": "All systems operational",
     "links": {
-      "product": {
-        "title": "Product",
-        "items": ["Features", "Who it's for", "FAQ"]
-      },
-      "company": {
-        "title": "Company",
-        "items": ["Contact us", "FAQ", "Get started"]
+      "merged": {
+        "title": "Links",
+        "items": ["Features", "Who it's for", "FAQ", "Contact us"]
       },
       "legal": {
         "title": "Legal",
