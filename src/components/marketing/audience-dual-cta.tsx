@@ -47,7 +47,7 @@ const CARRIER_BULLET_ICONS = [
 function PackageGlyph() {
   return (
     <span
-      className="pointer-events-none absolute -right-8 -bottom-8 opacity-[0.055] transition-opacity duration-300 group-hover:opacity-100 text-primary"
+      className="pointer-events-none absolute -end-8 -bottom-8 opacity-[0.055] transition-opacity duration-300 group-hover:opacity-100 text-primary"
       aria-hidden="true"
     >
       <IconPackage size={220} stroke={1} />
@@ -58,7 +58,7 @@ function PackageGlyph() {
 function TruckGlyph() {
   return (
     <span
-      className="pointer-events-none absolute -right-8 -bottom-8 opacity-[0.065] transition-opacity duration-300 group-hover:opacity-100 text-accent"
+      className="pointer-events-none absolute -end-8 -bottom-8 opacity-[0.065] transition-opacity duration-300 group-hover:opacity-100 text-accent"
       aria-hidden="true"
     >
       <IconTruck size={220} stroke={1} />
@@ -87,7 +87,7 @@ export function AudienceDualCTASection() {
             style={{ background: "#0D1B2E" }}
           >
             <span
-              className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-accent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 rtl:bg-linear-to-l"
               aria-hidden="true"
             />
 
@@ -156,7 +156,7 @@ export function AudienceDualCTASection() {
         <Animate variant="blurUp" delay={0.22}>
           <div className="group relative isolate flex h-full cursor-default flex-col overflow-hidden rounded-[28px] border border-border bg-card p-[clamp(32px,4vw,52px)] shadow-[0_2px_0_oklch(0.148_0.012_253/3%),0_8px_28px_oklch(0.541_0.233_258/7%)] transition-all duration-300 ease-out hover:scale-[1.03] hover:border-primary/20 hover:shadow-[0_32px_72px_oklch(0.541_0.233_258/14%)]">
             <span
-              className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="pointer-events-none absolute inset-x-10 top-0 h-[2.5px] rounded-b bg-linear-to-r from-transparent via-primary to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 rtl:bg-linear-to-l"
               aria-hidden="true"
             />
 

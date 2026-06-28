@@ -22,8 +22,11 @@ export function TrackingCard({ active }: { active: boolean }) {
         </span>
       </div>
       <div className="relative flex flex-1 flex-col justify-between">
+        {/* track line — sits behind dots, centered on the 16px dot column */}
+        <div className="pointer-events-none absolute inset-y-2 w-0.5 ltr:left-1.75 rtl:right-1.75"
+          style={{ background: "var(--color-border)" }} />
         <div
-          className="absolute left-2.25 top-2 w-0.5 rounded-full transition-all duration-700"
+          className="pointer-events-none absolute top-2 w-0.5 rounded-full transition-all duration-700 ltr:left-1.75 rtl:right-1.75"
           style={{
             height: `${(activeStage / (stages.length - 1)) * 90}%`,
             background: "oklch(0.70 0.18 30)",
@@ -32,7 +35,7 @@ export function TrackingCard({ active }: { active: boolean }) {
         {stages.map((s, i) => (
           <div
             key={s}
-            className="flex items-center gap-3 transition-opacity duration-500"
+            className="flex items-center gap-3 transition-opacity duration-500 rtl:flex-row-reverse"
             style={{ opacity: i <= activeStage ? 1 : 0.3 }}
           >
             <div
