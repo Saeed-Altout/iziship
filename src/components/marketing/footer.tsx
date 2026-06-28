@@ -21,7 +21,7 @@ export function MarketingFooter() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-10 py-12 sm:flex-row sm:items-start sm:justify-between sm:py-14">
           {/* Brand */}
-          <div className="flex flex-col items-start gap-3 sm:max-w-55">
+          <div className="flex flex-col gap-3 sm:max-w-55">
             <Logo />
             <p className="text-[13px] leading-relaxed text-muted-foreground">
               {t("tagline")}

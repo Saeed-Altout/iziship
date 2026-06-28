@@ -16,7 +16,7 @@ const SIZE = {
 export function Logo({ className, imageClassName, size = "md" }: LogoProps) {
   const h = SIZE[size];
   return (
-    <Link href="/" className={cn("shrink-0", className)}>
+    <Link href="/" className={cn("inline-flex shrink-0", className)}>
       <Image
         src="/logo.svg"
         alt="iziship"
