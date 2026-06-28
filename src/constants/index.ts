@@ -17,6 +17,12 @@ export const SMART_ROUTING_OUTPUTS = [
 
 export const SMART_ROUTING_ROTATES = ["rotate-2", "-rotate-2", "rotate-1", "-rotate-3", "rotate-3"] as const;
 
+export const AUDIENCE_MERCHANT_BULLET_KEYS = [0, 1, 2, 3] as const;
+export const AUDIENCE_CARRIER_BULLET_KEYS  = [0, 1, 2, 3] as const;
+
+export const AUDIENCE_MERCHANT_CHIP_KEYS = [0, 1, 2] as const;
+export const AUDIENCE_CARRIER_CHIP_KEYS  = [0, 1, 2] as const;
+
 export const CARRIERS = [
   { name: "FedEx", src: "/logos/logistics-delivery/fedex-logo.svg" },
   {
