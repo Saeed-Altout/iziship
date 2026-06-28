@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { LangToggle } from "@/components/marketing/lang-toggle";
+import { Link } from "@/i18n/navigation";
 
 export function MarketingNav() {
   const t = useTranslations("nav");
@@ -50,17 +51,26 @@ export function MarketingNav() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-6">
         {/* Logo */}
-        <a href="#" className="me-4 shrink-0" dir="ltr">
+        <Link href="/" className="me-4 shrink-0" dir="ltr">
           <Image
             src="/logo.svg"
             alt="iziship"
             width={0}
             height={0}
             priority
-            className="h-9 w-auto"
+            className="block h-8 w-auto dark:hidden sm:h-9"
             style={{ width: "auto" }}
           />
-        </a>
+          <Image
+            src="/logo-dark.svg"
+            alt="iziship"
+            width={0}
+            height={0}
+            priority
+            className="hidden h-8 w-auto dark:block sm:h-9"
+            style={{ width: "auto" }}
+          />
+        </Link>
 
         {/* Desktop nav */}
         <NavigationMenu viewport={false} className="hidden md:flex">
@@ -74,7 +84,7 @@ export function MarketingNav() {
                     "bg-transparent text-[14px] font-medium text-muted-foreground hover:bg-transparent hover:text-foreground focus:bg-transparent data-popup-open:bg-transparent data-open:bg-transparent",
                   )}
                 >
-                  <a href={l.href}>{l.label}</a>
+                  <Link href={l.href}>{l.label}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
@@ -89,7 +99,13 @@ export function MarketingNav() {
           <LangToggle className="hidden md:inline-flex" />
 
           <Button asChild size="sm" className="hidden md:inline-flex">
-            <a href="#cta">{t("cta")}</a>
+            <a
+              href="https://sevansy.com/auth/login"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t("cta")}
+            </a>
           </Button>
 
           {/* Mobile sheet trigger */}
@@ -118,35 +134,49 @@ export function MarketingNav() {
             >
               <SheetHeader className="border-b border-border px-6 py-4">
                 <SheetTitle asChild>
-                  <a href="#" dir="ltr">
+                  <Link href="/" dir="ltr">
                     <Image
                       src="/logo.svg"
                       alt="iziship"
                       width={0}
                       height={0}
-                      className="h-8 w-auto"
+                      className="block h-8 w-auto dark:hidden"
                       style={{ width: "auto" }}
                     />
-                  </a>
+                    <Image
+                      src="/logo-dark.svg"
+                      alt="iziship"
+                      width={0}
+                      height={0}
+                      className="hidden h-8 w-auto dark:block"
+                      style={{ width: "auto" }}
+                    />
+                  </Link>
                 </SheetTitle>
               </SheetHeader>
 
               <nav className="flex flex-col px-4 py-3">
                 {links.map((l) => (
                   <SheetClose asChild key={l.label}>
-                    <a
+                    <Link
                       href={l.href}
                       className="rounded-md px-3 py-2.5 text-[15px] font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
                     >
                       {l.label}
-                    </a>
+                    </Link>
                   </SheetClose>
                 ))}
               </nav>
 
               <div className="mt-auto flex flex-col gap-2 border-t border-border px-6 py-4">
                 <Button asChild size="sm">
-                  <a href="#cta">{t("cta")}</a>
+                  <a
+                    href="https://sevansy.com/auth/login"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {t("cta")}
+                  </a>
                 </Button>
                 <LangToggle size="sm" className="w-full" />
               </div>
