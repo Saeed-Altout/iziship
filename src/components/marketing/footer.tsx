@@ -10,7 +10,7 @@ const TWITTER_PATH =
 const LINKEDIN_PATH =
   "M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z M4 6a2 2 0 100-4 2 2 0 000 4z";
 
-const MERGED_HREFS = ["#platform-features", "#audience", "#faq", "#contact"];
+const MERGED_HREFS = ["/#platform-features", "/#audience", "/faq", "/contact", "/tracking"] as const;
 const LEGAL_HREFS = ["/privacy", "/terms", "/cookie-policy"] as const;
 
 export function MarketingFooter() {
@@ -38,12 +38,12 @@ export function MarketingFooter() {
               <ul className="flex flex-col gap-2.5">
                 {MERGED_HREFS.map((href, i) => (
                   <li key={i}>
-                    <a
+                    <Link
                       href={href}
                       className="text-[13px] text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {t(`links.merged.items.${i}`)}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

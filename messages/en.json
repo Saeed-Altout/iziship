@@ -9,7 +9,8 @@
       "features": "Features",
       "whoItsFor": "Who it's for",
       "faq": "FAQ",
-      "contact": "Contact"
+      "contact": "Contact",
+      "trackShipment": "Track Shipment"
     },
     "cta": "Start Free",
     "langToggle": "ع"
@@ -80,6 +81,7 @@
     "h2": "Questions we get a lot",
     "sub": "Everything you need to know before you start shipping with iziship.",
     "stillQuestions": "Still have questions? Talk to us",
+    "back": "Back to home",
     "items": [
       {
         "q": "What is iziship and how does it work?",
@@ -143,7 +145,8 @@
       "both": "Both"
     },
     "submit": "Request free access",
-    "privacy": "Your data is safe — we never share it with third parties."
+    "privacy": "Your data is safe — we never share it with third parties.",
+    "back": "Back to home"
   },
   "footer": {
     "tagline": "Syria's first multi-carrier logistics platform — built for merchants who ship COD.",
@@ -152,7 +155,7 @@
     "links": {
       "merged": {
         "title": "Links",
-        "items": ["Features", "Who it's for", "FAQ", "Contact us"]
+        "items": ["Features", "Who it's for", "FAQ", "Contact us", "Track Shipment"]
       },
       "legal": {
         "title": "Legal",
@@ -365,6 +368,26 @@
         "body": "If you have questions about our use of cookies, please contact us at privacy@iziship.com."
       }
     }
+  },
+  "tracking": {
+    "meta": {
+      "title": "Track Your Shipment",
+      "description": "Enter your iziship tracking number to get real-time status updates on your shipment."
+    },
+    "kicker": "SHIPMENT TRACKING",
+    "h1": "Track your shipment",
+    "sub": "Enter your tracking number below to see real-time delivery updates.",
+    "inputLabel": "Tracking number",
+    "inputPlaceholder": "e.g. IZI-2026-XXXXXX",
+    "submit": "Track",
+    "stages": ["Created", "Picked up", "In transit", "Out for delivery", "Delivered"],
+    "statusLabel": "Current status",
+    "notFound": {
+      "title": "Shipment not found",
+      "body": "We couldn't find a shipment with that tracking number. Double-check the number and try again, or contact us if you need help."
+    },
+    "back": "Back to home",
+    "contactCta": "Contact support"
   },
   "smartRouting": {
     "badge": "Smart Routing",

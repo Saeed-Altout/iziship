@@ -1,7 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { useLocale } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 import { cn } from "@/lib/utils";
 import { useScroll } from "@/hooks/use-scroll";
@@ -34,10 +33,11 @@ export function MarketingNav() {
   const locale = useLocale() as ILocale;
 
   const links = [
-    { label: t("links.features"), href: "#platform-features" },
-    { label: t("links.whoItsFor"), href: "#audience" },
-    { label: t("links.faq"), href: "#faq" },
-    { label: t("links.contact"), href: "#contact" },
+    { label: t("links.features"), href: "/#platform-features" },
+    { label: t("links.whoItsFor"), href: "/#audience" },
+    { label: t("links.faq"), href: "/faq" },
+    { label: t("links.contact"), href: "/contact" },
+    { label: t("links.trackShipment"), href: "/tracking" },
   ];
 
   return (
